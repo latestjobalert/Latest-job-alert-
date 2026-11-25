@@ -1,0 +1,36 @@
+name: Auto Update & Rebuild Site
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+    - cron: '30 6 * * *'
+    - cron: '0 12 * * *'
+    - cron: '30 15 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'templates/**'
+      - 'data/**'
+
+permissions:
+  contents: write
+
+jobs:
+  update-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 scripts/daily_auto_update.py
+      - run: python3 scripts/build_site.py
+      - run: |
+          git config user.name "Latest Job Alert Bot"
+          git config user.email "bot@latestjobalert.local"
+          git add data/portal_data.json index.html posts/ sitemap.xml robots.txt about.html contact.html privacy.html disclaimer.html
+          git diff --staged --quiet || git commit -m "Auto-update Latest Job Alert content & rebuild"
+          git push
