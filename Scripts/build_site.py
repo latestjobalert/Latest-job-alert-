@@ -6,9 +6,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA_FILE = ROOT / 'data' / 'portal_data.json'
-INDEX_TPL = ROOT / 'templates' / 'index_template.html'
-POST_TPL = ROOT / 'templates' / 'post_template.html'
+DATA_DIR = ROOT / 'data' if (ROOT / 'data').exists() else ROOT / 'Data'
+TPL_DIR = ROOT / 'templates' if (ROOT / 'templates').exists() else ROOT / 'Templates'
+DATA_FILE = DATA_DIR / 'portal_data.json'
+INDEX_TPL = TPL_DIR / 'index_template.html'
+POST_TPL = TPL_DIR / 'post_template.html'
 POSTS_DIR = ROOT / 'posts'
 POSTS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -143,3 +145,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
