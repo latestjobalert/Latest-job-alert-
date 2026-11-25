@@ -3,6 +3,7 @@ import json
 import os
 import re
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -10,6 +11,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / 'data' / 'portal_data.json'
 if not DATA_FILE.exists() and (ROOT / 'Data' / 'portal_data.json').exists():
     DATA_FILE = ROOT / 'Data' / 'portal_data.json'
+
+MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash-lite']
 
 def fetch_updates_via_gemini(api_key):
     today = datetime.now(timezone.utc).strftime('%d %B %Y')
@@ -31,17 +34,28 @@ def fetch_updates_via_gemini(api_key):
         '- "officialUrl": verified .gov.in or .nic.in or official portal URL\n'
         '- "primaryUrl": exact apply/admit-card/result/answer-key page URL if known, else same as officialUrl'
     )
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
         "tools": [{"google_search": {}}]
     }).encode('utf-8')
-    req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
-    with urllib.request.urlopen(req, timeout=45) as resp:
-        res = json.loads(resp.read().decode('utf-8'))
-    text = res['candidates'][0]['content']['parts'][0]['text']
-    m = re.search(r'\{[\s\S]*\}', text)
-    return json.loads(m.group(0)).get('updates', []) if m else []
+
+    last_err = None
+    for model in MODELS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                res = json.loads(resp.read().decode('utf-8'))
+            print(f'Fetched using model: {model}')
+            text = res['candidates'][0]['content']['parts'][0]['text']
+            m = re.search(r'\{[\s\S]*\}', text)
+            return json.loads(m.group(0)).get('updates', []) if m else []
+        except urllib.error.HTTPError as e:
+            last_err = f"{model}: HTTP {e.code}"
+            if e.code == 404:
+                continue
+            raise
+    raise RuntimeError(last_err or 'All models failed')
 
 def main():
     api_key = os.environ.get('GEMINI_API_KEY', '').strip()
@@ -105,4 +119,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-  
+    
