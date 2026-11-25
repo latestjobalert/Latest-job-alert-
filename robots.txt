@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://latestjobalert.pages.dev/sitemap.xml
