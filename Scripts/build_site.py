@@ -17,10 +17,90 @@ POSTS_DIR.mkdir(parents=True, exist_ok=True)
 SITE_BASE_URL = 'https://latestjobalert.pages.dev'
 TODAY_STR = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
+DEFAULT_SYLLABUS = {
+    'syl-1': {
+        'pattern': 'CHSL Tier-I: 100 Q, 200 Marks, 60 Min (-0.50 Negative) | JE Paper-I: 200 Q, 200 Marks, 120 Min (-0.25 Negative).',
+        'rows': [
+            ('English Language', '25 Q / 50 Marks', 'Spot the Error, Fill in the Blanks, Synonyms/Antonyms, Idioms, Cloze Test, Active/Passive'),
+            ('General Intelligence & Reasoning', '25 Q / 50 Marks (JE: 50 Q)', 'Analogy, Series, Coding-Decoding, Venn Diagrams, Syllogism, Embedded Figures'),
+            ('Quantitative Aptitude', '25 Q / 50 Marks', 'Percentage, Ratio, Profit & Loss, SI/CI, Time & Work, Mensuration, Geometry, Trigonometry, DI'),
+            ('General Awareness & Science', '25 Q / 50 Marks (JE: 50 Q)', 'History, Polity, Geography, Economy, General Science, Current Affairs & Static GK'),
+            ('SSC JE Engineering (Civil/Elec/Mech)', '100 Q / 100 Marks', 'Building Materials, Surveying, Soil Mechanics, Hydraulics, Electrical Machines, Thermodynamics, SOM')
+        ]
+    },
+    'syl-2': {
+        'pattern': 'CBT-1: 100 Q (100 Marks, 90 Min) | CBT-2: 120 Q (120 Marks, 90 Min) | Negative: 1/3rd | Plus CBAT Psycho Test for Station Master.',
+        'rows': [
+            ('Mathematics', 'CBT-1: 30 Q | CBT-2: 35 Q', 'Number System, LCM/HCF, Ratio, Percentage, Mensuration, Time & Distance, Profit & Loss, Algebra, Geometry'),
+            ('General Intelligence & Reasoning', 'CBT-1: 30 Q | CBT-2: 35 Q', 'Analogies, Series, Coding-Decoding, Mathematical Operations, Syllogism, Data Sufficiency, Statement-Conclusion'),
+            ('General Awareness', 'CBT-1: 40 Q | CBT-2: 50 Q', 'Current Affairs, Games & Sports, General Science (10th CBSE), Indian Polity, Railways & Economy')
+        ]
+    },
+    'syl-3': {
+        'pattern': 'UP TGT: 125 MCQs, 500 Marks, 2 Hours, No Negative Marking | PRT: 150 Q, 150 Marks, 2.5 Hours.',
+        'rows': [
+            ('TGT Concerned Subject (Hindi/Maths/Sci/SST/Eng)', '125 Q / 500 Marks', 'Graduation-level subject knowledge in the opted teaching subject'),
+            ('PRT Language (Hindi, English, Sanskrit)', '40 Marks', 'व्याकरण, अपठित गद्यांश, Grammar, Comprehension & Vocabulary'),
+            ('PRT Science, Maths & Environment', '40 Marks', 'Number System, Percentage, Profit-Loss, Daily Science, Indian Geography & Constitution'),
+            ('PRT Teaching Methodology & Child Psychology', '20 Marks', 'शिक्षण कौशल, बाल मनोविज्ञान, समावेशी शिक्षा, NEP 2020 & Learning Theories'),
+            ('PRT General Knowledge & Current Affairs', '30 Marks', 'UP Special GK, National/International Current Affairs, Art & Culture')
+        ]
+    },
+    'syl-4': {
+        'pattern': '150 Questions, 150 Marks, 2 Hours 30 Minutes, No Negative Marking. Part I (30 Marks) is Qualifying (min 30%).',
+        'rows': [
+            ('Part I: Language (Qualifying)', '30 Q / 30 Marks', 'English (8 Q) + Hindi / Urdu / Bangla (22 Q) — Basic Grammar & Comprehension'),
+            ('Part II: General Studies (GS)', '40 Q / 40 Marks (1–5: 120 Q)', 'Elementary Maths, Reasoning, GA, Science, Social Science, National Movement & Bihar GK'),
+            ('Part III: Concerned Subject (6–8, 9–10, 11–12)', '80 Q / 80 Marks', 'SCERT / NCERT curriculum based Maths & Science, Social Science, Hindi, English, Computer Science')
+        ]
+    },
+    'syl-5': {
+        'pattern': 'Written CBT: 100 Q, 100 Marks, 2 Hours (No Negative) + Physical Efficiency Test (PET): 100 Marks.',
+        'rows': [
+            ('General Knowledge & Reasoning', '40 Marks', 'MP State GK, History, Geography, Polity, Logical Reasoning, Analogy, Coding-Decoding'),
+            ('Intellectual Ability & Mental Aptitude', '30 Marks', 'Data Interpretation, Syllogism, Venn Diagrams, Number Series, Decision Making'),
+            ('Science & Simple Arithmetic', '30 Marks', 'Physics, Chemistry, Biology (10th level), Percentage, Ratio, Average, Time & Work'),
+            ('Physical Efficiency Test (PET)', '100 Marks', '800m Run (40 Marks), Long Jump (30 Marks), Shot Put (30 Marks)')
+        ]
+    }
+}
+
 def slugify(text, item_id):
     s = re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
     s = re.sub(r'-+', '-', s)[:60].strip('-')
     return f"{s}-{item_id}"
+
+def build_syllabus_block(it):
+    syl_rows = []
+    pattern = it.get('examPattern', '')
+    if it.get('syllabusDetails'):
+        for r in it['syllabusDetails']:
+            syl_rows.append((r.get('subject', ''), r.get('weight', ''), r.get('topics', '')))
+    elif it.get('id') in DEFAULT_SYLLABUS:
+        pattern = DEFAULT_SYLLABUS[it['id']]['pattern']
+        syl_rows = DEFAULT_SYLLABUS[it['id']]['rows']
+    if not syl_rows:
+        return ''
+
+    trs = '\n'.join(
+        f'<tr class="hover:bg-slate-50"><td class="px-3.5 py-2.5 font-bold text-slate-900">{html_lib.escape(s)}</td>'
+        f'<td class="px-3.5 py-2.5 font-semibold text-indigo-700 whitespace-nowrap">{html_lib.escape(w)}</td>'
+        f'<td class="px-3.5 py-2.5 text-slate-600">{html_lib.escape(t)}</td></tr>'
+        for s, w, t in syl_rows
+    )
+    pat_html = f'<div class="px-4 py-2.5 bg-indigo-50 text-xs font-semibold text-indigo-900 border-b border-indigo-200">{html_lib.escape(pattern)}</div>' if pattern else ''
+    return f'''<div class="rounded-xl border border-indigo-200 overflow-hidden">
+      <div class="bg-indigo-700 text-white px-4 py-2.5 text-xs font-bold uppercase tracking-wide">Exam Pattern &amp; Subject-Wise Syllabus</div>
+      {pat_html}
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-100 text-slate-700 text-xs uppercase">
+            <tr><th class="px-3.5 py-2.5">Subject / Paper</th><th class="px-3.5 py-2.5">Marks / Qs</th><th class="px-3.5 py-2.5">Detailed Topics</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">{trs}</tbody>
+        </table>
+      </div>
+    </div>'''
 
 def build_link_rows(it, sec_id):
     official_url = it.get('officialUrl') or 'https://india.gov.in/'
@@ -119,6 +199,7 @@ def main():
             .replace('{{FEE}}', html_lib.escape(it.get('fee') or 'As per Official Notice'))
             .replace('{{AGE}}', html_lib.escape(it.get('age') or 'As per Govt Rules'))
             .replace('{{VACANCIES}}', html_lib.escape(it.get('vacancies') or 'See Notification'))
+            .replace('{{SYLLABUS_BLOCK}}', build_syllabus_block(it))
             .replace('{{OFFICIAL_LINK_ROWS}}', build_link_rows(it, sec_id))
             .replace('{{RELATED_ITEMS_HTML}}', rel_html)
             .replace('{{JSON_LD}}', json_ld)
@@ -145,4 +226,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
