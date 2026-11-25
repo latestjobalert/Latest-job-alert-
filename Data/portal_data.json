@@ -658,6 +658,48 @@
       "accent": "bg-blue-700",
       "items": [
         {
+          "id": "auto-202611251826-3",
+          "title": "SSC CHSL Exam City 2026 Out, Check Tier 1 City Intimation Slip and Exam Location",
+          "badge": "ADMIT CARD",
+          "tag": "ADMIT CARD",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SSC CHSL Exam City 2026 Out, Check Tier 1 City Intimation Slip and Exam Location. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://ssc.gov.in/",
+          "primaryUrl": "https://ssc.gov.in/login",
+          "secondaryUrl": "https://ssc.gov.in/"
+        },
+        {
+          "id": "auto-202611251826-2",
+          "title": "UPSSSC Cane Supervisor Admit Card 2026 Out at upsssc.gov.in, Download गन्ना पर्यवेक्षक हॉल टिकट PDF",
+          "badge": "ADMIT CARD",
+          "tag": "ADMIT CARD",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UPSSSC Cane Supervisor Admit Card 2026 Out at upsssc.gov.in, Download गन्ना पर्यवेक्षक हॉल टिकट PDF. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://upsssc.gov.in/",
+          "primaryUrl": "https://upsssc.gov.in/",
+          "secondaryUrl": "https://upsssc.gov.in/"
+        },
+        {
           "id": "auto-202611251704-2",
           "title": "RVUNL JE Admit Card 2026 OUT: Download Prelims Call Letter PDF at energy.rajasthan.gov.in",
           "badge": "ADMIT CARD",
@@ -1197,6 +1239,69 @@
       "navKey": "answer",
       "accent": "bg-purple-700",
       "items": [
+        {
+          "id": "auto-202611251826-6",
+          "title": "SSC GD Previous Year Question Paper: Download Shift-Wise PDFs with Solutions & Answer Key",
+          "badge": "KEY OUT",
+          "tag": "KEY OUT",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SSC GD Previous Year Question Paper: Download Shift-Wise PDFs with Solutions & Answer Key. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://ssc.gov.in/",
+          "primaryUrl": "https://ssc.gov.in/login",
+          "secondaryUrl": "https://ssc.gov.in/"
+        },
+        {
+          "id": "auto-202611251826-4",
+          "title": "UPSSSC Answer key 2026 (OUT): Download Platoon Commander, Block Organizer & Havaldar Instructor Master SET PDF at upsssc.gov.in",
+          "badge": "KEY OUT",
+          "tag": "KEY OUT",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UPSSSC Answer key 2026 (OUT): Download Platoon Commander, Block Organizer & Havaldar Instructor Master SET PDF at upsssc.gov.in. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://upsssc.gov.in/",
+          "primaryUrl": "https://upsssc.gov.in/",
+          "secondaryUrl": "https://upsssc.gov.in/"
+        },
+        {
+          "id": "auto-202611251826-1",
+          "title": "UPSSSC answer key 2026 released for Block Organizer, Platoon Commander and Havaldar Instructor posts: Che",
+          "badge": "KEY OUT",
+          "tag": "KEY OUT",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UPSSSC answer key 2026 released for Block Organizer, Platoon Commander and Havaldar Instructor posts: Che. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://upsssc.gov.in/",
+          "primaryUrl": "https://upsssc.gov.in/",
+          "secondaryUrl": "https://upsssc.gov.in/"
+        },
         {
           "id": "ans-1",
           "title": "SSC JE Paper 1 Answer Key 2026 – Out (Objection Link)",
