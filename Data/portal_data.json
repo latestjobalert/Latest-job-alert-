@@ -939,6 +939,27 @@
       "accent": "bg-emerald-700",
       "items": [
         {
+          "id": "auto-202611251834-0",
+          "title": "SSC MTS Exam 2026: Most Important & Repeated Questions Asked in Previous Years",
+          "badge": "NEW",
+          "tag": "NEW",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SSC MTS Exam 2026: Most Important & Repeated Questions Asked in Previous Years. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://ssc.gov.in/",
+          "primaryUrl": "https://ssc.gov.in/login",
+          "secondaryUrl": "https://ssc.gov.in/"
+        },
+        {
           "id": "auto-202611251633-11",
           "title": "UIIC AO Mains Exam Date 2026 Out, Check Exam Schedule, Shift and Exam Duration",
           "badge": "NEW",
