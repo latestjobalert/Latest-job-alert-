@@ -50,6 +50,7 @@ def fetch_automated_updates(api_key):
         f"Answer Keys, Last Date Alerts, Form Correction Windows, Admissions, Scholarships, and "
         f"ITI/Apprentice updates released around {today}.\n"
         'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:\n'
+'Write completely original summaries in simple language.'
         '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
         '- "title": concise, accurate exam/post title in English\n'
         '- "badge": short pill (e.g. "NEW", "OUT", "LAST DATE", "LINK")\n'
