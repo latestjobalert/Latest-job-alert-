@@ -52,7 +52,7 @@ def fetch_updates_via_gemini(api_key):
             return json.loads(m.group(0)).get('updates', []) if m else []
         except urllib.error.HTTPError as e:
             last_err = f"{model}: HTTP {e.code}"
-            if e.code == 404:
+            if e.code in (404, 429, 503):
                 continue
             raise
     raise RuntimeError(last_err or 'All models failed')
