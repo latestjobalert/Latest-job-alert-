@@ -10,7 +10,11 @@ on:
   push:
     paths:
       - 'templates/**'
+      - 'Templates/**'
       - 'data/**'
+      - 'Data/**'
+      - 'scripts/**'
+      - 'Scripts/**'
 
 permissions:
   contents: write
@@ -36,4 +40,3 @@ jobs:
           git add -A
           git diff --staged --quiet || git commit -m "Auto-update Latest Job Alert content & rebuild"
           git push
-          
