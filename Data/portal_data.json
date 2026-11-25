@@ -716,6 +716,27 @@
       "accent": "bg-blue-700",
       "items": [
         {
+          "id": "auto-202611251633-4",
+          "title": "WBPSC Clerkship Exam Date 2026 Out at psc.wb.gov.in, Exam Schdule, Shift Timings & Admit Card",
+          "badge": "ADMIT CARD",
+          "tag": "ADMIT CARD",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "WBPSC Clerkship Exam Date 2026 Out at psc.wb.gov.in, Exam Schdule, Shift Timings & Admit Card. Published Wed, 25 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://bpsc.bihar.gov.in/",
+          "primaryUrl": "https://onlinebpsc.bihar.gov.in/",
+          "secondaryUrl": "https://bpsc.bihar.gov.in/"
+        },
+        {
           "id": "auto-202611251626-10",
           "title": "SBI Clerk Prelims Result 2026 (OUT) LIVE: Junior associate pre scorecards out; download JA mains hall ticket",
           "badge": "ADMIT CARD",
@@ -973,6 +994,90 @@
       "navKey": "jobs",
       "accent": "bg-emerald-700",
       "items": [
+        {
+          "id": "auto-202611251633-11",
+          "title": "UIIC AO Mains Exam Date 2026 Out, Check Exam Schedule, Shift and Exam Duration",
+          "badge": "NEW",
+          "tag": "NEW",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UIIC AO Mains Exam Date 2026 Out, Check Exam Schedule, Shift and Exam Duration. Published Fri, 20 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Fri, 20 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://www.ncs.gov.in/",
+          "primaryUrl": "https://www.india.gov.in/",
+          "secondaryUrl": "https://www.ncs.gov.in/"
+        },
+        {
+          "id": "auto-202611251633-10",
+          "title": "SBI Clerk 2026: Registration Begins for Special Recruitment Drive; Check Vacancy, Eligibility",
+          "badge": "NEW",
+          "tag": "NEW",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SBI Clerk 2026: Registration Begins for Special Recruitment Drive; Check Vacancy, Eligibility. Published Sat, 08 Aug 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Sat, 08 Aug 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://sbi.co.in/web/careers",
+          "primaryUrl": "https://sbi.co.in/web/careers",
+          "secondaryUrl": "https://sbi.co.in/web/careers"
+        },
+        {
+          "id": "auto-202611251633-9",
+          "title": "UPSC NDA 1 2027 Notification released, registration begins December 2; check eligibility and exam date",
+          "badge": "NEW",
+          "tag": "NEW",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UPSC NDA 1 2027 Notification released, registration begins December 2; check eligibility and exam date. Published Mon, 23 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Mon, 23 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://www.upsc.gov.in/",
+          "primaryUrl": "https://upsconline.nic.in/",
+          "secondaryUrl": "https://www.upsc.gov.in/"
+        },
+        {
+          "id": "auto-202611251633-8",
+          "title": "SBI Clerk Mains Exam Date 2026 Out, Check 26 and 27 November Exam Schedule",
+          "badge": "NEW",
+          "tag": "NEW",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SBI Clerk Mains Exam Date 2026 Out, Check 26 and 27 November Exam Schedule. Published Sat, 21 Nov 2026. Visit the official government portal below for direct apply, admit card, result, or notice links.",
+          "dates": {
+            "start": "Sat, 21 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Notification",
+          "officialUrl": "https://sbi.co.in/web/careers",
+          "primaryUrl": "https://sbi.co.in/web/careers",
+          "secondaryUrl": "https://sbi.co.in/web/careers"
+        },
         {
           "id": "auto-202611251626-11",
           "title": "SBI PO Interview Call Letter 2026 Released; Download Link Active for GE and PI",
