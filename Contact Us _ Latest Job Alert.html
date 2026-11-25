@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Latest Job Alert</title>
+  <meta name="description" content="Contact Latest Job Alert for corrections, broken link reports, copyright inquiries, or general feedback." />
+  <style>
+    :root { --primary: #0f4c81; --bg: #f4f6f9; --card: #ffffff; --text: #1f2937; --muted: #4b5563; --border: #e5e7eb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    header { background: var(--primary); color: #fff; padding: 16px 20px; }
+    .nav-wrap { max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; }
+    nav a { color: #e5e7eb; text-decoration: none; margin-left: 14px; font-size: 0.95rem; }
+    nav a:hover, nav a.active { color: #fff; text-decoration: underline; }
+    main { max-width: 960px; margin: 28px auto; padding: 0 16px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 28px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+    h1 { margin-top: 0; color: var(--primary); font-size: 1.85rem; }
+    h2 { color: var(--primary); font-size: 1.2rem; margin-top: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 18px; }
+    @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
+    input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.95rem; margin-bottom: 14px; font-family: inherit; }
+    button { background: var(--primary); color: #fff; border: none; padding: 12px 20px; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    button:hover { background: #0b3a63; }
+    .info-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+    .status-msg { display: none; margin-top: 12px; padding: 10px 12px; border-radius: 6px; background: #dcfce7; color: #166534; font-size: 0.95rem; }
+    footer { text-align: center; padding: 20px 16px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 40px; background: #fff; }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="/">Latest Job Alert</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/contact" class="active">Contact Us</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy">Privacy Policy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="card">
+      <h1>Contact Us</h1>
+      <p>Have a question about an exam notification, found a broken official link, or need to request a content correction? Use the form below or reach us through our official channels. We aim to respond to genuine inquiries within <strong>24–48 business hours</strong>.</p>
+
+      <div class="grid">
+        <section>
+          <h2>Send Us a Message</h2>
+          <!-- Replace YOUR_EMAIL_HERE with your active support email (e.g. via FormSubmit.co or Web3Forms) -->
+          <form id="contactForm" action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="Correction / Broken Link">Report Broken Link / Correction</option>
+              <option value="Exam Query">Exam / Notification Query</option>
+              <option value="Copyright / Removal">Copyright / Content Removal</option>
+              <option value="Advertising / Partnership">Advertising / General Feedback</option>
+            </select>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Include the post title or URL so we can help faster..."></textarea>
+
+            <button type="submit">Send Message</button>
+          </form>
+        </section>
+
+        <aside class="info-box">
+          <h2>Official Contact Channels</h2>
+          <p><strong>Website:</strong> <a href="https://latestjobalert.pages.dev">https://latestjobalert.pages.dev</a></p>
+          <p><strong>Support Email:</strong> <code>YOUR_EMAIL_HERE</code></p>
+          <p><strong>YouTube Channel:</strong> <a href="https://youtube.com/@officiallatestjobalert" target="_blank" rel="noopener">@officiallatestjobalert</a></p>
+
+          <h2>Before You Write</h2>
+          <p>Please note that <strong>Latest Job Alert</strong> is an informational website and does not conduct any recruitment or issue admit cards. For application fee refunds, form rejection, or exam center changes, please contact the respective official recruitment board directly.</p>
+        </aside>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Latest Job Alert. All rights reserved. |
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/disclaimer">Disclaimer</a>
+      <a href="/privacy">Privacy Policy</a>
+    </p>
+  </footer>
+</body>
+</html>
