@@ -11,21 +11,24 @@ DATA_FILE = ROOT / 'data' / 'portal_data.json'
 
 def fetch_updates_via_gemini(api_key):
     today = datetime.now(timezone.utc).strftime('%d %B %Y')
-    prompt = f\"\"\"Find the latest verified Indian Government Job notifications, Admit Cards, Results, Answer Keys, Last Date Alerts, Form Correction Windows, Admissions, Scholarships, and ITI/Apprentice updates released around {today}.
-Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:
-- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]
-- "title": concise exam/post title
-- "badge": short pill (e.g. "NEW", "OUT", "LAST DATE")
-- "shortInfo": 1-2 sentence verified summary
-- "startDate": string
-- "lastDate": string
-- "examDate": string
-- "fee": string
-- "age": string
-- "vacancies": string
-- "officialUrl": verified .gov.in or .nic.in or official portal URL
-- "primaryUrl": exact apply/admit-card/result/answer-key page URL if known, else same as officialUrl
-\"\"\"
+    prompt = (
+        f"Find the latest verified Indian Government Job notifications, Admit Cards, Results, "
+        f"Answer Keys, Last Date Alerts, Form Correction Windows, Admissions, Scholarships, and "
+        f"ITI/Apprentice updates released around {today}.\n"
+        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:\n'
+        '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
+        '- "title": concise exam/post title\n'
+        '- "badge": short pill (e.g. "NEW", "OUT", "LAST DATE")\n'
+        '- "shortInfo": 1-2 sentence verified summary\n'
+        '- "startDate": string\n'
+        '- "lastDate": string\n'
+        '- "examDate": string\n'
+        '- "fee": string\n'
+        '- "age": string\n'
+        '- "vacancies": string\n'
+        '- "officialUrl": verified .gov.in or .nic.in or official portal URL\n'
+        '- "primaryUrl": exact apply/admit-card/result/answer-key page URL if known, else same as officialUrl'
+    )
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
@@ -52,7 +55,12 @@ def main():
         for it in sec.get('items', []):
             existing_titles.add(it['title'].lower())
 
-    updates = fetch_updates_via_gemini(api_key)
+    try:
+        updates = fetch_updates_via_gemini(api_key)
+    except Exception as e:
+        print('Fetch warning (continuing build):', e)
+        return
+
     added = 0
     for idx, u in enumerate(updates):
         title = (u.get('title') or '').strip()
@@ -60,7 +68,7 @@ def main():
             continue
         existing_titles.add(title.lower())
         item = {
-            'id': f"auto-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{idx}",
+            'id': f"auto-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M')}-{idx}",
             'title': title,
             'badge': u.get('badge', 'NEW'),
             'tag': u.get('badge', 'NEW'),
