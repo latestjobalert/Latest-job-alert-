@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latest Job Alert — Sarkari Result, Latest Govt Jobs, Admit Card &amp; Exam Tools</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fef2f2',
+              100: '#fee2e2',
+              600: '#dc2626',
+              700: '#b91c1c',
+              800: '#991b1b',
+              900: '#7f1d1d',
+            },
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#091124',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Devanagari', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+    }
+    .portal-card {
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .portal-card:hover {
+      transform: translateY(-2px);
+    }
+    .list-item-link {
+      transition: background-color 0.15s ease, padding-left 0.15s ease;
+    }
+    .list-item-link:hover {
+      padding-left: 0.5rem;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .dark ::-webkit-scrollbar-thumb { background: #475569; }
+    @media print {
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Top Utility Bar -->
+  <div class="bg-navy-950 text-slate-200 text-xs py-1.5 px-4 border-b border-slate-800 no-print">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 font-medium text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span data-i18n="liveStatus">Updated: 25 Nov 2026 • Live Portal</span>
+        </span>
+        <span class="hidden sm:inline text-slate-500">|</span>
+        <span class="hidden sm:inline text-slate-300" data-i18n="topTrust">100% Official Portal Links Only</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="langToggleBtn" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-100 font-medium transition flex items-center gap-1" title="Switch Language">
+          <i data-lucide="languages" class="w-3.5 h-3.5"></i>
+          <span id="langLabel">हिंदी</span>
+        </button>
+        <button id="themeToggleBtn" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-100 font-medium transition flex items-center gap-1" title="Toggle Dark Mode">
+          <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline" id="themeLabel">Dark</span>
+        </button>
+        <button id="openAdminBtn" class="px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-semibold transition flex items-center gap-1" title="Add or Sync Updates">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Update Data</span>
+        </button>
+        <button id="openSavedBtn" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-semibold transition flex items-center gap-1">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+          <span data-i18n="savedBtn">Saved</span>
+          <span id="savedCountBadge" class="bg-amber-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Header Banner -->
+  <header class="bg-gradient-to-r from-brand-800 via-brand-700 to-rose-700 text-white shadow-md no-print">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/15 backdrop-blur border border-white/25 flex items-center justify-center shrink-0 shadow-inner">
+          <svg viewBox="0 0 40 40" class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="6" y="5" width="28" height="30" rx="5" class="stroke-white/90" />
+            <path d="M13 14h14M13 20h14M13 26h9" stroke-linecap="round" />
+            <circle cx="29" cy="28" r="5" class="fill-amber-400 stroke-brand-800" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Latest Job Alert</h1>
+            <span class="text-[11px] font-bold uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full">Official Hub</span>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100 mt-0.5" data-i18n="tagline">
+            Fastest Updates for Sarkari Result, Latest Govt Jobs, Admit Card, Answer Key &amp; Exam Tools
+          </p>
+        </div>
+      </div>
+
+      <!-- Instant Search Bar -->
+      <div class="w-full md:w-96">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <input
+            id="globalSearchInput"
+            type="search"
+            placeholder="Search SSC, RRB, BPSC, UP Police, Admit Card..."
+            class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-white text-slate-900 placeholder-slate-400 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+          />
+          <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700" title="Clear search">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar (SarkariExam 7 Core Links + Tools) -->
+    <nav class="bg-navy-900 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center gap-1 overflow-x-auto py-2 text-xs sm:text-sm font-semibold whitespace-nowrap">
+          <button data-nav="all" class="nav-tab px-3.5 py-1.5 rounded-lg bg-brand-600 text-white transition" data-i18n="navHome">Home</button>
+          <button data-nav="admit" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navAdmit">Admit Card</button>
+          <button data-nav="hot" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navHot">Hot Job</button>
+          <button data-nav="result" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navResult">Exam Result</button>
+          <button data-nav="jobs" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navTopForm">Top Online Form</button>
+          <button data-nav="sarkari" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navSarkari">Sarkari Result</button>
+          <button data-nav="answer" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-200 hover:bg-slate-800 transition" data-i18n="navAnswer">Answer Keys</button>
+          <button type="button" id="navToolsJumpBtn" class="px-3.5 py-1.5 rounded-lg text-amber-300 hover:bg-slate-800 transition inline-flex items-center gap-1">
+            <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
+            <span data-i18n="navTools">Free Tools</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sub-header Notice & Social Action Bar -->
+  <section class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col lg:flex-row items-center justify-between gap-3">
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 text-center lg:text-left">
+        <strong class="text-brand-700 dark:text-rose-400">Latest Job Alert</strong> provides all Latest Sarkari Result, Board Result, Sarkari Naukri Notifications, Admit Cards, Answer Keys &amp; Government Job Forms.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-2 shrink-0">
+        <button id="joinWhatsappBtn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          Join WhatsApp
+        </button>
+        <button id="joinTelegramBtn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-sm transition">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          Join Telegram
+        </button>
+        <a href="https://youtube.com/@officiallatestjobalert" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm transition">
+          <i data-lucide="youtube" class="w-3.5 h-3.5"></i>
+          YouTube Alerts
+        </a>
+        <button id="notifyToggleBtn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition">
+          <i data-lucide="bell" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span id="notifyBtnText">Enable Alerts</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl w-full mx-auto px-4 py-6 flex-1">
+    <div id="pageViewContainer" class="hidden max-w-5xl mx-auto space-y-5"></div>
+    <div id="homeViewWrapper" class="space-y-8">
+
+    <!-- Quick Filter Chips -->
+    <div class="flex flex-wrap items-center gap-2 no-print" id="filterChipsBar">
+      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 mr-1 flex items-center gap-1">
+        <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i> Quick Filter:
+      </span>
+      <button data-filter="all" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-navy-900 text-white dark:bg-white dark:text-slate-900 transition">All Updates</button>
+      <button data-filter="railway" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-600 transition">Railway / SSC</button>
+      <button data-filter="state" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-600 transition">UP / Bihar / State</button>
+      <button data-filter="banking" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-600 transition">Banking / UPSC</button>
+      <button data-filter="teaching" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-600 transition">Teaching / TET</button>
+      <button data-filter="admission" class="filter-chip px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-600 transition">NTA / Admission</button>
+    </div>
+
+    <!-- AD SLOT 1: Top Responsive Banner (728x90 Desktop / 320x50 Mobile) -->
+    <div id="adSlotTop" class="bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-center no-print">
+      <div class="text-[10px] uppercase tracking-widest text-slate-400 mb-1">Advertisement</div>
+      <!-- PASTE YOUR GOOGLE ADSENSE OR ADSTERRA TOP BANNER CODE BELOW -->
+      <div class="min-h-[60px] sm:min-h-[90px] flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-400 font-medium">
+        Responsive Ad Slot #1 (728×90 / 320×50) — Ready for Google AdSense / Adsterra
+      </div>
+    </div>
+
+    <!-- PRIORITY SPOTLIGHT: Last Date Alert & Correction Window (2 Prominent Columns) -->
+    <section id="prioritySpotlightSection" class="grid grid-cols-1 lg:grid-cols-2 gap-4 no-print">
+      <!-- Column 1: Last Date Alert -->
+      <article class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-red-200 dark:border-red-900/60 shadow-sm overflow-hidden flex flex-col">
+        <div class="bg-gradient-to-r from-red-700 to-rose-600 text-white px-4 py-2.5 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="clock-alert" class="w-4 h-4 text-amber-300"></i>
+            <h2 class="font-bold text-sm sm:text-base tracking-wide" data-i18n="lastDateHeading">Last Date Alert (Apply Fast)</h2>
+          </div>
+          <span class="text-[10px] font-extrabold uppercase bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full animate-pulse">Urgent</span>
+        </div>
+        <ul id="lastDateList" class="divide-y divide-slate-100 dark:divide-slate-800 flex-1">
+          <!-- Rendered by JS -->
+        </ul>
+      </article>
+
+      <!-- Column 2: Correction / Edit Window -->
+      <article class="bg-white dark:bg-slate-900 rounded-2xl border-2 border-sky-200 dark:border-sky-900/60 shadow-sm overflow-hidden flex flex-col">
+        <div class="bg-gradient-to-r from-sky-700 to-indigo-700 text-white px-4 py-2.5 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="file-edit" class="w-4 h-4 text-amber-300"></i>
+            <h2 class="font-bold text-sm sm:text-base tracking-wide" data-i18n="correctionHeading">Correction Date / Edit Form</h2>
+          </div>
+          <span class="text-[10px] font-extrabold uppercase bg-white/20 text-white px-2 py-0.5 rounded-full">Active</span>
+        </div>
+        <ul id="correctionList" class="divide-y divide-slate-100 dark:divide-slate-800 flex-1">
+          <!-- Rendered by JS -->
+        </ul>
+      </article>
+    </section>
+
+    <!-- GreenPix Labs Free Tools Strip (Fetched from greenpixlabs.pages.dev) -->
+    <section id="toolsSection" class="bg-gradient-to-br from-emerald-50/80 via-white to-teal-50/60 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/30 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 p-4 sm:p-5 shadow-sm no-print">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+        <div class="flex items-center gap-2">
+          <span class="p-1.5 rounded-lg bg-emerald-600 text-white shadow-sm">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </span>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white" data-i18n="toolsHeading">GreenPix Labs — Free Photo &amp; PDF Tools</h2>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Official tools from greenpixlabs.pages.dev for exam forms</p>
+          </div>
+        </div>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/" data-gpx-title="GreenPix Labs — All 84 Tools" class="inline-flex items-center gap-1 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-full shadow-sm transition">
+          <span>All 84 Tools</span>
+          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+      <!-- Top Row: Exam Form Filling Essentials -->
+      <div class="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
+        <span>Form Filling Essentials (फॉर्म भरने के ज़रूरी टूल्स)</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/ssc-photo-resizer" data-gpx-title="SSC Photo Resizer" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="scaling" class="w-5 h-5 text-purple-600 dark:text-purple-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">SSC Photo Resizer</span>
+        </button>
+        <button type="button" id="openNameDatePhotoBtn" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="calendar-plus" class="w-5 h-5 text-emerald-600 dark:text-emerald-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Name &amp; Date on Photo</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/compress-image-to-50kb" data-gpx-title="Compress to 50KB" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="image-down" class="w-5 h-5 text-sky-600 dark:text-sky-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Compress to 50KB (Photo)</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/compress-image-to-20kb" data-gpx-title="Compress to 20KB" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="minimize-2" class="w-5 h-5 text-indigo-600 dark:text-indigo-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Compress to 20KB (Sign)</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/merge-photo-signature" data-gpx-title="Merge Photo & Sign" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="layers" class="w-5 h-5 text-pink-600 dark:text-pink-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Merge Photo &amp; Sign</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/image-to-pdf" data-gpx-title="Image to PDF" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="file-image" class="w-5 h-5 text-orange-600 dark:text-orange-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Image to PDF</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/compress-pdf-in-kb" data-gpx-title="Compress PDF in KB" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="file-down" class="w-5 h-5 text-rose-600 dark:text-rose-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">Compress PDF in KB</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/id-card-to-pdf" data-gpx-title="ID Card to PDF" class="group flex flex-col items-center text-center p-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 transition shadow-xs">
+          <i data-lucide="credit-card" class="w-5 h-5 text-teal-600 dark:text-teal-400 mb-1.5 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-semibold leading-tight">ID Card to PDF</span>
+        </button>
+      </div>
+
+      <!-- Bottom Row: Other Photo & PDF Utilities -->
+      <div class="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
+        <span>Other Utilities (अन्य टूल्स)</span>
+      </div>
+      <div class="grid grid-cols-3 gap-2.5">
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/passport-photo-maker" data-gpx-title="Passport Photo (4×6)" class="group flex flex-col items-center text-center p-2.5 rounded-xl bg-white/80 dark:bg-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition">
+          <i data-lucide="user-square-2" class="w-4 h-4 text-amber-600 dark:text-amber-400 mb-1 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-medium leading-tight">Passport Photo (4×6)</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/pdf-editor" data-gpx-title="Online PDF Editor" class="group flex flex-col items-center text-center p-2.5 rounded-xl bg-white/80 dark:bg-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition">
+          <i data-lucide="file-pen-line" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 mb-1 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-medium leading-tight">Online PDF Editor</span>
+        </button>
+        <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/merge-pdf" data-gpx-title="Merge PDF" class="group flex flex-col items-center text-center p-2.5 rounded-xl bg-white/80 dark:bg-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition">
+          <i data-lucide="files" class="w-4 h-4 text-cyan-600 dark:text-cyan-400 mb-1 group-hover:scale-110 transition"></i>
+          <span class="text-xs font-medium leading-tight">Merge PDF</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 8 Quick-Access Highlight Colored Boxes (4x2 Grid) -->
+    <section id="highlightSection" class="no-print">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <i data-lucide="flame" class="w-4 h-4 text-brand-600"></i>
+          <span data-i18n="hotHighlights">Trending Forms &amp; Featured Alerts</span>
+        </h2>
+        <span class="text-xs text-slate-500 dark:text-slate-400">Click any box for full details</span>
+      </div>
+      <div id="highlightGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Search / Active Filter Banner (shown when searching or filtering by nav) -->
+    <div id="activeFilterBanner" class="hidden bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-2.5 flex items-center justify-between gap-3">
+      <div class="text-xs sm:text-sm font-medium text-amber-900 dark:text-amber-200" id="activeFilterText"></div>
+      <button id="resetAllFiltersBtn" class="text-xs font-bold text-brand-700 dark:text-rose-400 hover:underline shrink-0">Reset View</button>
+    </div>
+
+    <!-- AD SLOT 2: In-Feed Responsive Banner -->
+    <div id="adSlotInFeed" class="bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-center no-print">
+      <div class="text-[10px] uppercase tracking-widest text-slate-400 mb-1">Sponsored</div>
+      <!-- PASTE YOUR GOOGLE ADSENSE IN-FEED OR ADSTERRA NATIVE CODE BELOW -->
+      <div class="min-h-[60px] sm:min-h-[90px] flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-400 font-medium">
+        Responsive Ad Slot #2 (In-Feed / Native) — Ready for Google AdSense / Adsterra
+      </div>
+    </div>
+
+    <!-- Main 3-Column Content Grid (All 9 SarkariExam Sections) -->
+    <section id="mainColumnsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Rendered by JS -->
+    </section>
+
+    <!-- Empty Search State -->
+    <div id="emptySearchState" class="hidden bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-10 text-center">
+      <i data-lucide="search-x" class="w-10 h-10 text-slate-400 mx-auto mb-3"></i>
+      <h3 class="text-base font-bold text-slate-800 dark:text-slate-100">No matching notifications found</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Try searching for SSC, RRB, BPSC, UPSSSC, NTA, or click Reset View.</p>
+      <button id="emptyResetBtn" class="mt-4 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition">Show All Updates</button>
+    </div>
+
+    <!-- Rich Original Career & Exam Guides (AdSense-Friendly Content) -->
+    <section class="space-y-4 pt-2 no-print">
+      <div class="flex items-center justify-between">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="book-open-check" class="w-5 h-5 text-brand-600"></i>
+          <span>Sarkari Exam Guides, OTR Rules &amp; Application Tips (2026–27)</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="train" class="w-5 h-5 text-brand-600"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">1. Railway, SSC &amp; Banking Exam Roadmap (2026–27)</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Central recruitments like <strong>SSC CHSL, SSC JE, RRB Station Master, RRB Paramedical, and IBPS RRB</strong> follow a structured Computer-Based Test (CBT) + Skill/Document Verification cycle. Before applying on <a href="https://ssc.gov.in/" target="_blank" rel="noopener noreferrer" class="text-brand-700 dark:text-rose-400 font-semibold hover:underline">ssc.gov.in</a> or <a href="https://indianrailways.gov.in/" target="_blank" rel="noopener noreferrer" class="text-brand-700 dark:text-rose-400 font-semibold hover:underline">indianrailways.gov.in</a>, complete your One-Time Registration (OTR), verify Aadhaar details, and keep your category/EWS certificate updated for the current financial year.
+          </p>
+        </article>
+
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="landmark" class="w-5 h-5 text-emerald-600"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">2. Bihar &amp; UP State Exams (BPSC, BSSC, UPSSSC, UPPSC)</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            State commissions such as <strong>BPSC (TRE 4.0), BSSC, UPPSC (RO/ARO), and UPSSSC (PET-based posts)</strong> require valid state domicile and non-creamy layer (NCL) certificates for reservation benefits. For UPPSC, OTR registration is mandatory prior to form submission, while Bihar Post Matric Scholarship (<a href="https://pmsonline.bihar.gov.in/" target="_blank" rel="noopener noreferrer" class="text-emerald-700 dark:text-emerald-400 font-semibold hover:underline">pmsonline.bihar.gov.in</a>) requires Aadhaar-seeded bank accounts for DBT.
+          </p>
+        </article>
+
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="image-plus" class="w-5 h-5 text-sky-600"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">3. Photo, Signature &amp; PDF Size Rules (Avoid Rejection)</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Most form rejections happen due to blurred photos or wrong file sizes. SSC &amp; RRB generally require a <strong>20KB–50KB</strong> passport photo and <strong>10KB–20KB</strong> black-ink signature on white paper, while educational certificates must be merged into a clear PDF under 200KB–500KB. Use our integrated <strong>GreenPix Labs</strong> tools above to resize, compress, and merge your documents in seconds.
+          </p>
+        </article>
+
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-alert" class="w-5 h-5 text-amber-500"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">4. Beware of Fake Websites &amp; Fraudulent Links</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Many clone websites mimic popular Sarkari portals. <strong>Latest Job Alert</strong> never asks for bank OTPs or application fees directly — every "Apply Online", "Admit Card", and "Result" button inside our detail cards routes straight to verified <code>.gov.in</code> or <code>.nic.in</code> official portals.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    </div>
+  </main>
+
+  <!-- Quick Links & Footer -->
+  <footer class="bg-navy-950 text-slate-300 mt-10 border-t border-slate-800 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-6 space-y-5">
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold">
+        <span class="text-slate-400">Connect with Latest Job Alert:</span>
+        <a href="https://youtube.com/@officiallatestjobalert" target="_blank" rel="noopener noreferrer" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-red-600 text-white transition">YouTube</a>
+        <button data-social="Telegram" class="social-link-btn px-3 py-1 rounded-full bg-slate-800 hover:bg-sky-600 text-white transition">Telegram</button>
+        <button data-social="WhatsApp" class="social-link-btn px-3 py-1 rounded-full bg-slate-800 hover:bg-emerald-600 text-white transition">WhatsApp</button>
+        <button data-social="Instagram" class="social-link-btn px-3 py-1 rounded-full bg-slate-800 hover:bg-pink-600 text-white transition">Instagram</button>
+        <button data-social="Android App" class="social-link-btn px-3 py-1 rounded-full bg-slate-800 hover:bg-amber-600 text-white transition">Mobile App (PWA)</button>
+      </div>
+
+      <div class="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <div>
+          Copyright &copy; 2026 <strong class="text-white">Latest Job Alert</strong>. All Rights Reserved.
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="about.html" class="hover:text-white transition">About Us</a>
+          <a href="contact.html" class="hover:text-white transition">Contact Us</a>
+          <a href="disclaimer.html" class="hover:text-white transition">Disclaimer</a>
+          <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+          <a href="sitemap.xml" class="hover:text-white transition">Sitemap XML</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back-to-Top Button -->
+  <button id="backToTopBtn" class="hidden fixed bottom-5 right-5 z-40 w-10 h-10 rounded-full bg-brand-600 hover:bg-brand-700 text-white shadow-lg flex items-center justify-center transition no-print" title="Back to Top">
+    <i data-lucide="chevron-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- Toast Notification -->
+  <div id="toastContainer" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden no-print">
+    <div id="toastMessage" class="px-4 py-2.5 rounded-xl bg-navy-900 text-white text-xs sm:text-sm font-semibold shadow-xl border border-slate-700 flex items-center gap-2"></div>
+  </div>
+
+  <!-- Universal Modal Backdrop (Detail View / Tools / Saved / Footer Info) -->
+  <div id="appModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div id="modalDialogBox" class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden my-auto max-h-[92vh] flex flex-col transition-all">
+      <div class="flex items-center justify-between px-5 py-3.5 bg-gradient-to-r from-brand-700 to-navy-900 text-white shrink-0">
+        <h3 id="modalTitle" class="text-sm sm:text-base font-bold pr-4 truncate">Details</h3>
+        <button id="closeModalBtn" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition" title="Close">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div id="modalBody" class="p-5 overflow-y-auto text-sm space-y-4">
+        <!-- Dynamic Content -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. GROUNDED DATASET (All 9 SarkariExam Categories + 8 Highlight Boxes)
+    // =========================================================================
+    const PORTAL_DATA = {{PORTAL_DATA_JSON}};
+    const LAST_DATE_ITEMS = PORTAL_DATA.LAST_DATE_ITEMS;
+    const CORRECTION_ITEMS = PORTAL_DATA.CORRECTION_ITEMS;
+    const HIGHLIGHTS = PORTAL_DATA.HIGHLIGHTS;
+    const SECTIONS = PORTAL_DATA.SECTIONS;
+    const POST_URL_MAP = {{POST_URL_MAP_JSON}};
+
+    // =========================================================================
+    // 2. STATE MANAGEMENT (Saved Bookmarks, Dark Mode, Language, Active Filters)
+    // =========================================================================
+    const state = {
+      lang: 'en',
+      dark: false,
+      activeNav: 'all',
+      activeFilter: 'all',
+      searchQuery: '',
+      expandedSections: new Set(),
+      savedIds: [],
+      customItems: [],
+      alertsEnabled: false,
+      focusTimerInterval: null
+    };
+
+    try {
+      const storedCustom = localStorage.getItem('lja_custom_items');
+      if (storedCustom) {
+        state.customItems = JSON.parse(storedCustom);
+        state.customItems.forEach(ci => {
+          if (ci.section === 'lastDate') LAST_DATE_ITEMS.unshift(ci);
+          else if (ci.section === 'correction') CORRECTION_ITEMS.unshift(ci);
+          else {
+            const sec = SECTIONS.find(s => s.id === ci.section);
+            if (sec) sec.items.unshift(ci);
+          }
+        });
+      }
+      const storedSaved = localStorage.getItem('lja_saved_ids');
+      if (storedSaved) state.savedIds = JSON.parse(storedSaved);
+      const storedDark = localStorage.getItem('lja_dark');
+      if (storedDark === 'true') state.dark = true;
+      const storedAlerts = localStorage.getItem('lja_alerts');
+      if (storedAlerts === 'true') state.alertsEnabled = true;
+    } catch (e) {}
+
+    function persistState() {
+      try {
+        localStorage.setItem('lja_custom_items', JSON.stringify(state.customItems));
+        localStorage.setItem('lja_saved_ids', JSON.stringify(state.savedIds));
+        localStorage.setItem('lja_dark', String(state.dark));
+        localStorage.setItem('lja_alerts', String(state.alertsEnabled));
+      } catch (e) {}
+    }
+
+    const I18N = {
+      en: {
+        liveStatus: 'Live Portal Updates • Nov 2026',
+        topTrust: '100% Official Portal Links Only',
+        savedBtn: 'Saved',
+        tagline: 'Fastest Updates for Sarkari Result, Latest Govt Jobs, Admit Card, Answer Key & Exam Tools',
+        navHome: 'Home',
+        navAdmit: 'Admit Card',
+        navHot: 'Hot Job',
+        navResult: 'Exam Result',
+        navTopForm: 'Top Online Form',
+        navSarkari: 'Sarkari Result',
+        navAnswer: 'Answer Keys',
+        navTools: 'Free Tools',
+        lastDateHeading: 'Last Date Alert (Apply Fast)',
+        correctionHeading: 'Correction Date / Edit Form',
+        toolsHeading: 'GreenPix Labs — Free Photo & PDF Tools',
+        hotHighlights: 'Trending Forms & Featured Alerts'
+      },
+      hi: {
+        liveStatus: 'लाइव पोर्टल अपडेट्स • नवम्बर 2026',
+        topTrust: 'केवल 100% आधिकारिक वेबसाइट लिंक',
+        savedBtn: 'सेव्ड',
+        tagline: 'सरकारी रिजल्ट, लेटेस्ट जॉब्स, एडमिट कार्ड, आंसर की और फ्री एग्जाम टूल्स का सबसे तेज़ पोर्टल',
+        navHome: 'होम',
+        navAdmit: 'एडमिट कार्ड',
+        navHot: 'हॉट जॉब',
+        navResult: 'रिजल्ट',
+        navTopForm: 'ऑनलाइन फॉर्म',
+        navSarkari: 'सरकारी रिजल्ट',
+        navAnswer: 'आंसर की',
+        navTools: 'फ्री टूल्स',
+        lastDateHeading: 'अंतिम तिथि अलर्ट (Last Date)',
+        correctionHeading: 'फॉर्म सुधार तिथि (Correction Date)',
+        toolsHeading: 'GreenPix Labs — फ्री फोटो और PDF टूल्स',
+        hotHighlights: 'ट्रेंडिंग फॉर्म और मुख्य अलर्ट्स'
+      }
+    };
+
+    // =========================================================================
+    // 3. HELPERS & TOAST
+    // =========================================================================
+    function showToast(msg) {
+      const container = document.getElementById('toastContainer');
+      const box = document.getElementById('toastMessage');
+      box.textContent = msg;
+      container.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => container.classList.add('hidden'), 2600);
+    }
+
+    function getAllItemsMap() {
+      const map = new Map();
+      HIGHLIGHTS.forEach(h => map.set(h.id, { ...h, sectionId: 'jobs', sectionTitle: 'Trending Form' }));
+      LAST_DATE_ITEMS.forEach(i => map.set(i.id, { ...i, sectionId: 'lastDate', sectionTitle: 'Last Date Alert' }));
+      CORRECTION_ITEMS.forEach(i => map.set(i.id, { ...i, sectionId: 'correction', sectionTitle: 'Correction Date / Edit Form' }));
+      SECTIONS.forEach(s => s.items.forEach(it => map.set(it.id, { ...it, sectionId: s.id, sectionTitle: s.title })));
+      return map;
+    }
+
+    function toggleSaveItem(id) {
+      const idx = state.savedIds.indexOf(id);
+      if (idx >= 0) {
+        state.savedIds.splice(idx, 1);
+        showToast('Removed from Saved Jobs');
+      } else {
+        state.savedIds.push(id);
+        showToast('Saved to your Bookmarks!');
+      }
+      persistState();
+      updateSavedBadge();
+    }
+
+    function updateSavedBadge() {
+      document.getElementById('savedCountBadge').textContent = state.savedIds.length;
+    }
+
+    // =========================================================================
+    // 4. RENDERING: HIGHLIGHTS & 9 MAIN SECTIONS
+    // =========================================================================
+    function renderPrioritySpotlight() {
+      const ldList = document.getElementById('lastDateList');
+      const corList = document.getElementById('correctionList');
+      const secEl = document.getElementById('prioritySpotlightSection');
+      if (!ldList || !corList) return;
+
+      const q = state.searchQuery.trim().toLowerCase();
+      const filterItems = (arr) => arr.filter(it => {
+        const matchQ = !q || it.title.toLowerCase().includes(q) || it.badge.toLowerCase().includes(q);
+        const matchChip = state.activeFilter === 'all' || it.filter.includes(state.activeFilter);
+        return matchQ && matchChip;
+      });
+
+      const ldItems = filterItems(LAST_DATE_ITEMS);
+      const corItems = filterItems(CORRECTION_ITEMS);
+
+      if (ldItems.length === 0 && corItems.length === 0 && q) {
+        secEl.classList.add('hidden');
+        return;
+      }
+      secEl.classList.remove('hidden');
+
+      const buildRow = (it, badgeClass) => {
+        const isSaved = state.savedIds.includes(it.id);
+        return `
+          <li class="list-item-link flex items-center justify-between gap-2 px-3.5 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800/60">
+            <button data-open-id="${it.id}" class="text-left flex-1 text-xs sm:text-[13px] font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-700 dark:hover:text-rose-400 leading-snug flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current shrink-0"></span>
+              <span class="flex-1">${it.title}</span>
+              <span class="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClass}">${it.badge}</span>
+            </button>
+            <button data-save-id="${it.id}" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 ${isSaved ? 'text-amber-500' : ''} shrink-0" title="Bookmark">
+              <i data-lucide="bookmark" class="w-3.5 h-3.5 ${isSaved ? 'fill-amber-500' : ''}"></i>
+            </button>
+          </li>
+        `;
+      };
+
+      ldList.innerHTML = ldItems.length
+        ? ldItems.map(it => buildRow(it, 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300')).join('')
+        : '<li class="px-4 py-4 text-xs text-slate-500 text-center">No matching Last Date alerts</li>';
+
+      corList.innerHTML = corItems.length
+        ? corItems.map(it => buildRow(it, 'bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300')).join('')
+        : '<li class="px-4 py-4 text-xs text-slate-500 text-center">No matching Correction alerts</li>';
+    }
+
+    function renderHighlights() {
+      const grid = document.getElementById('highlightGrid');
+      const q = state.searchQuery.trim().toLowerCase();
+      const filtered = HIGHLIGHTS.filter(item => {
+        if (q && !item.title.toLowerCase().includes(q) && !item.subtitle.toLowerCase().includes(q)) return false;
+        if (state.activeFilter !== 'all' && !item.tags.includes(state.activeFilter) && !item.tags.includes('all')) return false;
+        return true;
+      });
+
+      const sectionEl = document.getElementById('highlightSection');
+      if (state.activeNav !== 'all' && state.activeNav !== 'hot' && !q) {
+        sectionEl.classList.add('hidden');
+        return;
+      }
+      sectionEl.classList.remove('hidden');
+
+      grid.innerHTML = filtered.map(item => `
+        <button data-open-id="${item.id}" class="portal-card text-left bg-gradient-to-br ${item.colorClass} text-white rounded-xl p-3.5 shadow-sm hover:shadow-md flex flex-col justify-between min-h-[86px] relative overflow-hidden group">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-sm leading-snug group-hover:underline">${item.title}</span>
+            <span class="shrink-0 text-[10px] font-extrabold uppercase bg-white/20 backdrop-blur px-2 py-0.5 rounded-full">${item.badge}</span>
+          </div>
+          <div class="text-xs text-white/90 mt-2 flex items-center justify-between">
+            <span>${item.subtitle}</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 transition"></i>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    function renderSections() {
+      const grid = document.getElementById('mainColumnsGrid');
+      const emptyEl = document.getElementById('emptySearchState');
+      const bannerEl = document.getElementById('activeFilterBanner');
+      const bannerText = document.getElementById('activeFilterText');
+      const q = state.searchQuery.trim().toLowerCase();
+
+      // Determine visible sections based on top nav
+      const navMap = {
+        all: null,
+        admit: ['admit'],
+        hot: ['jobs', 'diploma', 'outsourcing'],
+        result: ['result'],
+        jobs: ['jobs', 'syllabus'],
+        sarkari: ['result', 'admit', 'jobs', 'admission', 'verification'],
+        answer: ['answer']
+      };
+      const allowedIds = navMap[state.activeNav];
+
+      let totalMatches = 0;
+      const cardsHtml = [];
+
+      SECTIONS.forEach(sec => {
+        if (allowedIds && !allowedIds.includes(sec.id)) return;
+
+        const matchingItems = sec.items.filter(it => {
+          const matchesQuery = !q || it.title.toLowerCase().includes(q) || (it.tag && it.tag.toLowerCase().includes(q));
+          const matchesChip = state.activeFilter === 'all' || it.filter.includes(state.activeFilter) || it.filter.includes('all');
+          return matchesQuery && matchesChip;
+        });
+
+        if (matchingItems.length === 0) return;
+        totalMatches += matchingItems.length;
+
+        const isExpanded = state.expandedSections.has(sec.id) || Boolean(q) || Boolean(allowedIds);
+        const visibleItems = isExpanded ? matchingItems : matchingItems.slice(0, 6);
+        const heading = state.lang === 'hi' ? sec.titleHi : sec.title;
+
+        const itemsHtml = visibleItems.map(it => {
+          const isSaved = state.savedIds.includes(it.id);
+          return `
+            <li class="border-b border-slate-100 dark:border-slate-800 last:border-none">
+              <div class="list-item-link flex items-start justify-between gap-2 px-3.5 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800/60">
+                <button data-open-id="${it.id}" class="text-left flex-1 text-xs sm:text-[13px] font-medium text-slate-800 dark:text-slate-200 hover:text-brand-700 dark:hover:text-rose-400 leading-snug flex items-start gap-2">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-600 shrink-0"></span>
+                  <span>
+                    ${it.title}
+                    ${it.tag ? `<span class="ml-1.5 inline-block text-[10px] font-bold uppercase px-1.5 py-0.2 rounded bg-brand-50 dark:bg-brand-900/50 text-brand-700 dark:text-rose-300 border border-brand-200 dark:border-brand-800">${it.tag}</span>` : ''}
+                  </span>
+                </button>
+                <button data-save-id="${it.id}" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 ${isSaved ? 'text-amber-500' : ''} shrink-0" title="Bookmark">
+                  <i data-lucide="bookmark" class="w-3.5 h-3.5 ${isSaved ? 'fill-amber-500' : ''}"></i>
+                </button>
+              </div>
+            </li>
+          `;
+        }).join('');
+
+        cardsHtml.push(`
+          <article id="sec-${sec.id}" class="scroll-mt-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col">
+            <div class="${sec.accent} text-white px-4 py-2.5 flex items-center justify-between">
+              <h2 class="font-bold text-sm sm:text-base tracking-wide">${heading}</h2>
+              <span class="text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full">${matchingItems.length}</span>
+            </div>
+            <ul class="divide-y divide-slate-100 dark:divide-slate-800 flex-1">
+              ${itemsHtml}
+            </ul>
+            ${matchingItems.length > 6 && !q && !allowedIds ? `
+              <div class="p-2.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 text-center">
+                <button data-toggle-sec="${sec.id}" class="text-xs font-bold text-brand-700 dark:text-rose-400 hover:underline">
+                  ${isExpanded ? 'Show Less ▲' : 'View All »'}
+                </button>
+              </div>
+            ` : ''}
+          </article>
+        `);
+      });
+
+      grid.innerHTML = cardsHtml.join('');
+
+      if (totalMatches === 0) {
+        emptyEl.classList.remove('hidden');
+      } else {
+        emptyEl.classList.add('hidden');
+      }
+
+      if (q || state.activeNav !== 'all' || state.activeFilter !== 'all') {
+        bannerEl.classList.remove('hidden');
+        const parts = [];
+        if (state.activeNav !== 'all') parts.push(`Category: ${state.activeNav.toUpperCase()}`);
+        if (state.activeFilter !== 'all') parts.push(`Filter: ${state.activeFilter.toUpperCase()}`);
+        if (q) parts.push(`Search: "${state.searchQuery}"`);
+        bannerText.textContent = `Showing ${totalMatches} matching updates (${parts.join(' • ')})`;
+      } else {
+        bannerEl.classList.add('hidden');
+      }
+    }
+
+    function renderAll() {
+      renderPrioritySpotlight();
+      renderHighlights();
+      renderSections();
+      updateSavedBadge();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // =========================================================================
+    // 5. MODAL SYSTEM (Job Detail + 8 Interactive Tools + Saved + Footer Pages)
+    // =========================================================================
+    const modal = document.getElementById('appModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    function openModal(title, html, isWide = false) {
+      clearInterval(state.focusTimerInterval);
+      const box = document.getElementById('modalDialogBox');
+      if (box) {
+        box.classList.toggle('max-w-5xl', isWide);
+        box.classList.toggle('max-w-3xl', !isWide);
+        box.classList.toggle('h-[90vh]', isWide);
+      }
+      modalBody.classList.toggle('p-0', isWide);
+      modalBody.classList.toggle('p-5', !isWide);
+      modalBody.classList.toggle('flex-1', isWide);
+      modalBody.classList.toggle('flex', isWide);
+      modalBody.classList.toggle('flex-col', isWide);
+      modalTitle.textContent = title;
+      modalBody.innerHTML = html;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeModal() {
+      clearInterval(state.focusTimerInterval);
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function openNameDatePhotoModal() {
+      openModal('Name & Date on Photo Generator', `
+        <div class="space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl px-3.5 py-2 text-xs">
+            <span class="text-emerald-800 dark:text-emerald-300 font-medium">SSC / Railway / State Exam standard white-strip Photo + Name + DOP generator</span>
+            <a href="https://greenpixlabs.pages.dev/" target="_blank" rel="noopener noreferrer" class="font-bold text-emerald-700 dark:text-emerald-300 hover:underline">GreenPix Labs ↗</a>
+          </div>
+          <input id="ndFileInput" type="file" accept="image/*" class="block w-full text-xs file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white file:font-bold" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold mb-1">Candidate Name</label>
+              <input id="ndNameInput" type="text" value="RAHUL KUMAR" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm uppercase" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Date of Photo (DOP)</label>
+              <input id="ndDateInput" type="text" value="25-11-2026" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+          </div>
+          <div class="text-center space-y-3 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
+            <canvas id="ndCanvas" width="240" height="300" class="mx-auto border border-slate-300 rounded bg-white"></canvas>
+            <div>
+              <a id="ndDownloadLink" download="photo_with_name_date.jpg" class="inline-block px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition">Download Photo JPG</a>
+            </div>
+          </div>
+        </div>
+      `);
+
+      let ndImg = null;
+      function renderNd() {
+        const canvas = document.getElementById('ndCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#f1f5f9';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (ndImg) {
+          ctx.drawImage(ndImg, 0, 0, canvas.width, 240);
+        } else {
+          ctx.fillStyle = '#64748b';
+          ctx.font = 'bold 13px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('Upload Photo Above', canvas.width / 2, 120);
+        }
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 240, canvas.width, 60);
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(0, 240); ctx.lineTo(canvas.width, 240); ctx.stroke();
+        ctx.fillStyle = '#000000';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText((document.getElementById('ndNameInput').value || '').toUpperCase(), canvas.width / 2, 265);
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText('DOP: ' + (document.getElementById('ndDateInput').value || ''), canvas.width / 2, 287);
+        document.getElementById('ndDownloadLink').href = canvas.toDataURL('image/jpeg', 0.92);
+      }
+
+      document.getElementById('ndFileInput').addEventListener('change', (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        const img = new Image();
+        img.onload = () => { ndImg = img; renderNd(); };
+        img.src = URL.createObjectURL(f);
+      });
+      document.getElementById('ndNameInput').addEventListener('input', renderNd);
+      document.getElementById('ndDateInput').addEventListener('input', renderNd);
+      renderNd();
+    }
+
+    function openGpxPopup(url, title) {
+      openModal(title + ' — GreenPix Labs', `
+        <div class="flex items-center justify-between px-4 py-2 bg-emerald-50 dark:bg-emerald-950/60 border-b border-emerald-200 dark:border-emerald-800 text-xs shrink-0">
+          <span class="font-medium text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            Running live from GreenPix Labs inside popup
+          </span>
+          <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-bold text-emerald-700 dark:text-emerald-300 hover:underline">
+            Full Screen <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+        <iframe src="${url}" title="${title}" class="w-full flex-1 min-h-[70vh] border-0 bg-white" loading="eager"></iframe>
+      `, true);
+    }
+
+    function showHomeView() {
+      document.getElementById('pageViewContainer').classList.add('hidden');
+      document.getElementById('homeViewWrapper').classList.remove('hidden');
+      if (window.location.hash) history.replaceState(null, '', '#');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openItemDetail(id) {
+      if (typeof POST_URL_MAP !== 'undefined' && POST_URL_MAP[id]) {
+        window.location.href = POST_URL_MAP[id];
+        return;
+      }
+      if (id === 'hl-8') {
+        openFocusTimerModal();
+        return;
+      }
+      const item = getAllItemsMap().get(id);
+      if (!item) return;
+      const isSaved = state.savedIds.includes(item.id);
+      const dates = item.dates || { start: 'Check Portal', lastDate: 'Check Portal', examDate: 'Notified Soon' };
+      const slug = item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 55);
+      try { history.replaceState(null, '', '#/post/' + slug); } catch (e) {}
+
+      const homeWrap = document.getElementById('homeViewWrapper');
+      const pageWrap = document.getElementById('pageViewContainer');
+      homeWrap.classList.add('hidden');
+      pageWrap.classList.remove('hidden');
+
+      pageWrap.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <nav class="text-xs text-slate-500 dark:text-slate-400 flex flex-wrap items-center gap-1.5">
+            <button type="button" id="pvBackHomeBtn" class="text-brand-700 dark:text-rose-400 font-bold hover:underline inline-flex items-center gap-1">
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Home
+            </button>
+            <span>/</span>
+            <span>${item.sectionTitle || 'Notification'}</span>
+            <span>/</span>
+            <span class="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[220px] sm:max-w-md">${item.title}</span>
+          </nav>
+          <span class="text-[11px] font-mono text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg">/posts/${slug}.html</span>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-center">
+          <div class="text-[10px] uppercase tracking-widest text-slate-400 mb-1">Advertisement</div>
+          <div class="min-h-[60px] flex items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-400">Responsive Post Banner Ad (728×90 / 320×50)</div>
+        </div>
+
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="bg-gradient-to-r from-navy-900 to-brand-800 text-white p-5 sm:p-6">
+            <span class="inline-block text-[11px] font-bold uppercase bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full mb-2">${item.sectionTitle || 'Latest Update'}</span>
+            <h1 class="text-xl sm:text-2xl font-extrabold leading-snug">${item.title}</h1>
+            <p class="text-xs text-rose-100 mt-1.5">Updated: 25 November 2026 • Verified Official Portal Link</p>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-5 text-sm">
+            <div class="bg-slate-50 dark:bg-slate-800/70 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+              <h2 class="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-rose-400 mb-1">Short Information</h2>
+              <p class="text-slate-700 dark:text-slate-200 leading-relaxed">${item.shortInfo}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                <h2 class="font-bold text-xs uppercase text-emerald-700 dark:text-emerald-400 mb-2">Important Dates</h2>
+                <ul class="text-xs sm:text-sm space-y-1.5 text-slate-700 dark:text-slate-300">
+                  <li><strong>Start / Release:</strong> ${dates.start}</li>
+                  <li><strong>Last Date / Window:</strong> <span class="text-brand-600 dark:text-rose-400 font-bold">${dates.lastDate}</span></li>
+                  <li><strong>Exam / Next Stage:</strong> ${dates.examDate}</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                <h2 class="font-bold text-xs uppercase text-blue-700 dark:text-blue-400 mb-2">Application Fee &amp; Age Limit</h2>
+                <ul class="text-xs sm:text-sm space-y-1.5 text-slate-700 dark:text-slate-300">
+                  <li><strong>Fee:</strong> ${item.fee || 'As per official notice'}</li>
+                  <li><strong>Age Limit:</strong> ${item.age || 'As per Govt rules'}</li>
+                  <li><strong>Vacancy / Scope:</strong> ${item.vacancies || 'See Notification'}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/70 dark:bg-emerald-950/30 p-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 class="font-bold text-sm text-emerald-900 dark:text-emerald-300">Need Photo Resizer or PDF Compressor?</h2>
+                <p class="text-xs text-emerald-700 dark:text-emerald-400">Open GreenPix Labs tools in a quick popup before uploading documents.</p>
+              </div>
+              <button type="button" data-gpx-url="https://greenpixlabs.pages.dev/" data-gpx-title="GreenPix Labs — All 84 Tools" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">Open GreenPix Labs Tools</button>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 dark:border-slate-700 p-4 bg-slate-50/60 dark:bg-slate-800/40">
+              <h2 class="font-bold text-xs uppercase text-slate-800 dark:text-slate-200 mb-2">Step-by-Step Instructions</h2>
+              <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-1.5">
+                <li>Read the official notification carefully for eligibility, age limit, and post-wise criteria.</li>
+                <li>Prepare scanned Photo (20–50KB), Signature (10–20KB), and PDFs using the GreenPix Labs tools.</li>
+                <li>Click the official portal link below, complete registration, verify all entries, and save the final PDF.</li>
+              </ol>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <div class="bg-navy-900 text-white px-4 py-2.5 text-xs font-bold uppercase tracking-wide">Important Official Links</div>
+              <div class="divide-y divide-slate-200 dark:divide-slate-700 text-xs sm:text-sm">
+                ${(() => {
+                  const secId = item.sectionId || '';
+                  const pUrl = item.primaryUrl || item.officialUrl;
+                  const sUrl = item.secondaryUrl || item.officialUrl;
+                  let row1Label = 'Apply Online';
+                  let row1Btn = 'Apply Now';
+                  let row2Label = 'Download Official Notification';
+                  let row2Btn = 'Click Here';
+
+                  if (secId === 'admit') {
+                    row1Label = 'Download Admit Card / Exam City Slip';
+                    row1Btn = 'Download Admit Card';
+                    row2Label = 'Exam Date & Instructions Notice';
+                  } else if (secId === 'result') {
+                    row1Label = 'Download Result / Score Card';
+                    row1Btn = 'Check Result';
+                    row2Label = 'Cut-Off / Merit List PDF';
+                  } else if (secId === 'answer') {
+                    row1Label = 'Download Answer Key / Response Sheet';
+                    row1Btn = 'Download Answer Key';
+                    row2Label = 'Raise Objection / Challenge Key';
+                    row2Btn = 'Objection Link';
+                  } else if (secId === 'correction') {
+                    row1Label = 'Form Correction / Edit / Finalize Link';
+                    row1Btn = 'Edit / Correct Form';
+                    row2Label = 'Correction Window Notice';
+                  } else if (secId === 'syllabus') {
+                    row1Label = 'Download Syllabus & Exam Pattern PDF';
+                    row1Btn = 'Download Syllabus';
+                    row2Label = 'Official Exam Portal';
+                  } else if (secId === 'verification') {
+                    row1Label = 'Online Registration / Verification Portal';
+                    row1Btn = 'Open Portal';
+                    row2Label = 'Check Application Status / Guidelines';
+                  }
+
+                  return `
+                    <div class="flex items-center justify-between gap-2 px-4 py-3">
+                      <span class="font-semibold">${row1Label}</span>
+                      <a href="${pUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs inline-flex items-center gap-1 shrink-0 transition">
+                        ${row1Btn} <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                      </a>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 px-4 py-3">
+                      <span class="font-semibold">${row2Label}</span>
+                      <a href="${sUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs inline-flex items-center gap-1 shrink-0 transition">
+                        ${row2Btn} <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                      </a>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 px-4 py-3">
+                      <span class="font-semibold">Official Website</span>
+                      <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer" class="text-brand-700 dark:text-rose-400 font-bold hover:underline truncate max-w-[220px]">${item.officialUrl.replace('https://', '')}</a>
+                    </div>
+                  `;
+                })()}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+              <button id="pvSaveToggleBtn" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold inline-flex items-center gap-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'text-amber-500 fill-amber-500' : ''}"></i>
+                <span>${isSaved ? 'Saved in Bookmarks' : 'Save for Later'}</span>
+              </button>
+              <button id="pvCopyShareBtn" class="px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-xs font-bold inline-flex items-center gap-1.5 hover:bg-slate-800 transition">
+                <i data-lucide="share-2" class="w-4 h-4"></i> Copy Share Summary
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="bg-navy-900 text-white px-4 py-2.5 flex items-center justify-between">
+            <h2 class="font-bold text-sm sm:text-base">More ${item.sectionTitle || 'Related'} Updates</h2>
+            <button type="button" id="pvViewAllCategoryBtn" class="text-xs font-bold text-amber-300 hover:underline">View All »</button>
+          </div>
+          <ul class="divide-y divide-slate-100 dark:divide-slate-800">
+            ${(() => {
+              const allEntries = Array.from(getAllItemsMap().values());
+              const related = allEntries.filter(x => x.id !== item.id && x.id !== 'hl-8' && x.sectionId === item.sectionId).slice(0, 6);
+              if (related.length === 0) {
+                return '<li class="px-4 py-3 text-xs text-slate-500">No more items in this section.</li>';
+              }
+              return related.map(rel => `
+                <li class="list-item-link">
+                  <button type="button" data-open-id="${rel.id}" class="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 flex items-center justify-between gap-2 text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 hover:text-brand-700 dark:hover:text-rose-400">
+                    <span class="flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-brand-600 shrink-0"></span>
+                      <span>${rel.title}</span>
+                    </span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                  </button>
+                </li>
+              `).join('');
+            })()}
+          </ul>
+        </section>
+      `;
+
+      if (window.lucide) lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.getElementById('pvBackHomeBtn').addEventListener('click', showHomeView);
+      const viewAllBtn = document.getElementById('pvViewAllCategoryBtn');
+      if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+          showHomeView();
+          const navTarget = ({ admit: 'admit', result: 'result', answer: 'answer', jobs: 'jobs' })[item.sectionId] || 'all';
+          const tab = document.querySelector(`.nav-tab[data-nav="${navTarget}"]`);
+          if (tab) tab.click();
+        });
+      }
+      document.getElementById('pvSaveToggleBtn').addEventListener('click', () => {
+        toggleSaveItem(item.id);
+        renderAll();
+        openItemDetail(item.id);
+      });
+      document.getElementById('pvCopyShareBtn').addEventListener('click', () => {
+        copyTextSafe(`${item.title}\nOfficial Link: ${item.officialUrl}\nVia Latest Job Alert`);
+        showToast('Notification summary copied!');
+      });
+    }
+
+    function copyTextSafe(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    // =========================================================================
+    // 6. ALL 8 INTERACTIVE TOOLS + FOCUS TIMER
+    // =========================================================================
+    function openFocusTimerModal() {
+      let secondsLeft = 300;
+      let running = false;
+
+      openModal('Daily 5-Minute Exam Focus & Calm Timer', `
+        <div class="text-center space-y-5 py-4">
+          <p class="text-slate-600 dark:text-slate-300 text-sm">Take 5 calm minutes before starting your mock test or online form submission.</p>
+          <div id="focusTimerDisplay" class="text-5xl font-extrabold text-brand-700 dark:text-rose-400 tabular-nums">05:00</div>
+          <div class="flex items-center justify-center gap-3">
+            <button id="focusStartBtn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition">Start Timer</button>
+            <button id="focusResetBtn" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white font-bold text-sm transition">Reset</button>
+          </div>
+        </div>
+      `);
+
+      const display = document.getElementById('focusTimerDisplay');
+      const startBtn = document.getElementById('focusStartBtn');
+
+      function updateDisplay() {
+        const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+        const s = String(secondsLeft % 60).padStart(2, '0');
+        display.textContent = `${m}:${s}`;
+      }
+
+      startBtn.addEventListener('click', () => {
+        if (running) {
+          clearInterval(state.focusTimerInterval);
+          running = false;
+          startBtn.textContent = 'Resume';
+          return;
+        }
+        running = true;
+        startBtn.textContent = 'Pause';
+        state.focusTimerInterval = setInterval(() => {
+          if (secondsLeft > 0) {
+            secondsLeft--;
+            updateDisplay();
+          } else {
+            clearInterval(state.focusTimerInterval);
+            running = false;
+            startBtn.textContent = 'Completed!';
+            showToast('5-Minute Focus Session Complete!');
+          }
+        }, 1000);
+      });
+
+      document.getElementById('focusResetBtn').addEventListener('click', () => {
+        clearInterval(state.focusTimerInterval);
+        running = false;
+        secondsLeft = 300;
+        startBtn.textContent = 'Start Timer';
+        updateDisplay();
+      });
+    }
+
+    function openToolModal(toolName) {
+      if (toolName === 'age') {
+        openModal('Govt Exam Age Calculator', `
+          <div class="space-y-4">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Calculate your exact age in Years, Months, and Days as on the exam notification cut-off date.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1">Date of Birth</label>
+                <input id="ageDobInput" type="date" value="2001-05-15" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Age as on Date (Cut-off)</label>
+                <input id="ageTargetInput" type="date" value="2027-01-01" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Category (For Govt Relaxation Check)</label>
+              <select id="ageCatSelect" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                <option value="0">General / EWS (No Relaxation)</option>
+                <option value="3">OBC-NCL (+3 Years Relaxation)</option>
+                <option value="5">SC / ST (+5 Years Relaxation)</option>
+                <option value="10">PwBD General (+10 Years Relaxation)</option>
+              </select>
+            </div>
+            <button id="calcAgeRunBtn" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition">Calculate Exact Age</button>
+            <div id="ageResultBox" class="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 text-center"></div>
+          </div>
+        `);
+
+        function runAgeCalc() {
+          const dob = new Date(document.getElementById('ageDobInput').value);
+          const target = new Date(document.getElementById('ageTargetInput').value);
+          const relax = Number(document.getElementById('ageCatSelect').value);
+          const out = document.getElementById('ageResultBox');
+          if (isNaN(dob) || isNaN(target) || dob > target) {
+            out.innerHTML = `<span class="text-red-600 font-semibold">Please enter a valid Date of Birth earlier than the cut-off date.</span>`;
+            return;
+          }
+          let years = target.getFullYear() - dob.getFullYear();
+          let months = target.getMonth() - dob.getMonth();
+          let days = target.getDate() - dob.getDate();
+          if (days < 0) {
+            months--;
+            days += new Date(target.getFullYear(), target.getMonth(), 0).getDate();
+          }
+          if (months < 0) {
+            years--;
+            months += 12;
+          }
+          out.innerHTML = `
+            <div class="text-lg font-extrabold text-emerald-800 dark:text-emerald-300">${years} Years, ${months} Months, ${days} Days</div>
+            <div class="text-xs text-slate-600 dark:text-slate-300 mt-1">Effective upper-limit comparison with +${relax} yrs relaxation: <strong>${Math.max(0, years - relax)} yrs</strong></div>
+          `;
+        }
+        document.getElementById('calcAgeRunBtn').addEventListener('click', runAgeCalc);
+        runAgeCalc();
+      }
+
+      else if (toolName === 'resizer') {
+        openModal('Photo & Signature Resizer (SSC / UPSC / Railway)', `
+          <div class="space-y-4">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Resize and compress your photo or signature directly in your browser. Nothing is uploaded to any server.</p>
+            <input id="resizerFileInput" type="file" accept="image/*" class="block w-full text-xs file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-brand-600 file:text-white file:font-bold" />
+            <div class="grid grid-cols-3 gap-2">
+              <button data-preset="200x230" class="preset-btn px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:bg-brand-50">SSC Photo (200x230)</button>
+              <button data-preset="140x60" class="preset-btn px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:bg-brand-50">Signature (140x60)</button>
+              <button data-preset="350x350" class="preset-btn px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:bg-brand-50">UPSC Square (350x350)</button>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1">Width (px)</label>
+                <input id="resWidth" type="number" value="200" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Height (px)</label>
+                <input id="resHeight" type="number" value="230" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Quality (%)</label>
+                <input id="resQuality" type="number" value="80" min="10" max="100" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+            </div>
+            <div id="resPreviewArea" class="hidden border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-center space-y-2">
+              <canvas id="resCanvas" class="mx-auto border border-slate-300 rounded max-w-full"></canvas>
+              <div id="resSizeInfo" class="text-xs font-semibold text-emerald-700 dark:text-emerald-400"></div>
+              <a id="resDownloadLink" download="resized_exam_image.jpg" class="inline-block px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">Download Resized JPG</a>
+            </div>
+          </div>
+        `);
+
+        let loadedImg = null;
+        function processResize() {
+          if (!loadedImg) return;
+          const w = Math.max(20, Number(document.getElementById('resWidth').value) || 200);
+          const h = Math.max(20, Number(document.getElementById('resHeight').value) || 230);
+          const q = Math.min(100, Math.max(10, Number(document.getElementById('resQuality').value) || 80)) / 100;
+          const canvas = document.getElementById('resCanvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(loadedImg, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', q);
+          const kb = Math.round((dataUrl.length * 3) / 4 / 1024);
+          document.getElementById('resPreviewArea').classList.remove('hidden');
+          document.getElementById('resSizeInfo').textContent = `Output: ${w} × ${h} px • Approx ${kb} KB`;
+          document.getElementById('resDownloadLink').href = dataUrl;
+        }
+
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const [pw, ph] = btn.dataset.preset.split('x');
+            document.getElementById('resWidth').value = pw;
+            document.getElementById('resHeight').value = ph;
+            processResize();
+          });
+        });
+
+        ['resWidth', 'resHeight', 'resQuality'].forEach(id => {
+          document.getElementById(id).addEventListener('input', processResize);
+        });
+
+        document.getElementById('resizerFileInput').addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const img = new Image();
+          img.onload = () => { loadedImg = img; processResize(); };
+          img.src = URL.createObjectURL(file);
+        });
+      }
+
+      else if (toolName === 'namedate') {
+        openModal('Name & Date on Photo Generator', `
+          <div class="space-y-4">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Many SSC, Defence &amp; State exams require Name and Date of Photo (DOP) printed clearly at the bottom of your passport photo.</p>
+            <input id="ndFileInput" type="file" accept="image/*" class="block w-full text-xs file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white file:font-bold" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1">Candidate Name</label>
+                <input id="ndNameInput" type="text" value="RAHUL KUMAR" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm uppercase" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Date of Photo (DOP)</label>
+                <input id="ndDateInput" type="text" value="25-11-2026" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              </div>
+            </div>
+            <div class="text-center space-y-3 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
+              <canvas id="ndCanvas" width="240" height="300" class="mx-auto border border-slate-300 rounded bg-white"></canvas>
+              <a id="ndDownloadLink" download="photo_with_name_date.jpg" class="inline-block px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">Download Photo JPG</a>
+            </div>
+          </div>
+        `);
+
+        let ndImg = null;
+        function renderNd() {
+          const canvas = document.getElementById('ndCanvas');
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#f1f5f9';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          if (ndImg) {
+            ctx.drawImage(ndImg, 0, 0, canvas.width, 240);
+          } else {
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Upload Photo Above', canvas.width / 2, 120);
+          }
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 240, canvas.width, 60);
+          ctx.strokeStyle = '#0f172a';
+          ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(0, 240); ctx.lineTo(canvas.width, 240); ctx.stroke();
+          ctx.fillStyle = '#000000';
+          ctx.font = 'bold 14px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText((document.getElementById('ndNameInput').value || '').toUpperCase(), canvas.width / 2, 265);
+          ctx.font = 'bold 13px sans-serif';
+          ctx.fillText('DOP: ' + (document.getElementById('ndDateInput').value || ''), canvas.width / 2, 287);
+          document.getElementById('ndDownloadLink').href = canvas.toDataURL('image/jpeg', 0.92);
+        }
+
+        document.getElementById('ndFileInput').addEventListener('change', (e) => {
+          const f = e.target.files[0];
+          if (!f) return;
+          const img = new Image();
+          img.onload = () => { ndImg = img; renderNd(); };
+          img.src = URL.createObjectURL(f);
+        });
+        document.getElementById('ndNameInput').addEventListener('input', renderNd);
+        document.getElementById('ndDateInput').addEventListener('input', renderNd);
+        renderNd();
+      }
+
+      else if (toolName === 'jpg2pdf') {
+        openModal('JPG / PNG to PDF Converter (Print / Save PDF)', `
+          <div class="space-y-4">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Select one or more document images (Marksheet, Aadhaar, Certificate) and print/save as a clean A4 PDF.</p>
+            <input id="pdfImgsInput" type="file" accept="image/*" multiple class="block w-full text-xs file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-amber-600 file:text-white file:font-bold" />
+            <div id="pdfImgsPreview" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+            <button id="printPdfBtn" class="hidden w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm">Save / Print as PDF</button>
+          </div>
+        `);
+        document.getElementById('pdfImgsInput').addEventListener('change', (e) => {
+          const files = Array.from(e.target.files);
+          const preview = document.getElementById('pdfImgsPreview');
+          preview.innerHTML = files.map(f => `
+            <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-2 bg-slate-50 dark:bg-slate-800">
+              <img src="${URL.createObjectURL(f)}" class="w-full h-36 object-contain rounded" />
+              <div class="text-[11px] truncate mt-1 text-center">${f.name}</div>
+            </div>
+          `).join('');
+          if (files.length > 0) document.getElementById('printPdfBtn').classList.remove('hidden');
+        });
+        document.getElementById('printPdfBtn').addEventListener('click', () => window.print());
+      }
+
+      else if (toolName === 'cv') {
+        openModal('Quick CV / Resume Maker', `
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input id="cvName" type="text" placeholder="Full Name" value="Amit Kumar" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="cvPhone" type="text" placeholder="Mobile & Email" value="+91 9876543210 | amit@email.com" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="cvQual" type="text" placeholder="Highest Qualification" value="B.A. (Hons) / 12th Pass" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="cvSkills" type="text" placeholder="Skills (CCC, Typing, MS Office)" value="CCC Certified, Hindi/English Typing, MS Excel" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+            <div id="cvPreviewCard" class="bg-white text-slate-900 border border-slate-300 rounded-xl p-5 space-y-3 shadow-inner"></div>
+            <button id="cvPrintBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm">Print / Save Resume PDF</button>
+          </div>
+        `);
+        function renderCv() {
+          document.getElementById('cvPreviewCard').innerHTML = `
+            <div class="border-b-2 border-slate-900 pb-2">
+              <div class="text-xl font-extrabold uppercase">${document.getElementById('cvName').value || 'Your Name'}</div>
+              <div class="text-xs text-slate-600">${document.getElementById('cvPhone').value}</div>
+            </div>
+            <div><strong class="text-xs uppercase text-indigo-700">Qualification:</strong> <span class="text-sm">${document.getElementById('cvQual').value}</span></div>
+            <div><strong class="text-xs uppercase text-indigo-700">Technical Skills:</strong> <span class="text-sm">${document.getElementById('cvSkills').value}</span></div>
+            <div class="text-xs text-slate-500 pt-2">Declaration: I hereby declare that the above information is true to the best of my knowledge.</div>
+          `;
+        }
+        ['cvName', 'cvPhone', 'cvQual', 'cvSkills'].forEach(id => document.getElementById(id).addEventListener('input', renderCv));
+        document.getElementById('cvPrintBtn').addEventListener('click', () => window.print());
+        renderCv();
+      }
+
+      else if (toolName === 'biodata') {
+        openModal('Shadi Biodata Maker', `
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input id="bdName" type="text" value="Vikash Sharma" placeholder="Full Name" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="bdDob" type="text" value="12/08/1998" placeholder="Date of Birth" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="bdEdu" type="text" value="B.Tech / Govt Job Aspirant" placeholder="Education & Job" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+              <input id="bdFamily" type="text" value="Father: Shri Rajesh Sharma | Mother: Smt. Sunita Devi" placeholder="Family Details" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+            <div id="bdPreview" class="bg-amber-50 text-slate-900 border-2 border-amber-400 rounded-xl p-5 space-y-2"></div>
+            <button id="bdPrintBtn" class="w-full py-2.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-sm">Print / Save Biodata PDF</button>
+          </div>
+        `);
+        function renderBd() {
+          document.getElementById('bdPreview').innerHTML = `
+            <div class="text-center font-extrabold text-rose-800 text-base border-b border-amber-300 pb-2">|| श्री गणेशाय नमः — BIODATA ||</div>
+            <div class="text-sm space-y-1.5 pt-1">
+              <div><strong>Name:</strong> ${document.getElementById('bdName').value}</div>
+              <div><strong>Date of Birth:</strong> ${document.getElementById('bdDob').value}</div>
+              <div><strong>Education / Occupation:</strong> ${document.getElementById('bdEdu').value}</div>
+              <div><strong>Family:</strong> ${document.getElementById('bdFamily').value}</div>
+            </div>
+          `;
+        }
+        ['bdName', 'bdDob', 'bdEdu', 'bdFamily'].forEach(id => document.getElementById(id).addEventListener('input', renderBd));
+        document.getElementById('bdPrintBtn').addEventListener('click', () => window.print());
+        renderBd();
+      }
+
+      else if (toolName === 'mppeb') {
+        openModal('MPPEB / ESB Combined Template Sheet', `
+          <div class="space-y-4">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Preview &amp; prepare the standard MPPEB (MP ESB) single-sheet Photo + Signature + Handwritten Declaration layout.</p>
+            <div class="bg-white text-slate-900 border-2 border-dashed border-slate-400 rounded-xl p-4 space-y-4 text-center">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="border border-slate-400 p-4 rounded h-32 flex items-center justify-center text-xs font-bold text-slate-500">Paste Recent Photo (4x5 cm)</div>
+                <div class="border border-slate-400 p-4 rounded h-32 flex items-center justify-center text-xs font-bold text-slate-500">Sign Inside Box (Black Ink)</div>
+              </div>
+              <div class="border border-slate-400 p-4 rounded text-xs text-left">
+                <strong>Handwritten Declaration Box:</strong><br/>
+                "I hereby declare that all the statements made in this application are true, complete and correct to the best of my knowledge."
+              </div>
+            </div>
+            <button onclick="window.print()" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm">Print Blank Template Sheet</button>
+          </div>
+        `);
+      }
+
+      else if (toolName === 'docverify') {
+        openModal('Exam Document Verification Checklist', `
+          <div class="space-y-3">
+            <p class="text-xs text-slate-500 dark:text-slate-400">Keep these documents verified before applying for any Central or State Govt exam:</p>
+            <div class="space-y-2 text-xs sm:text-sm">
+              <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <input type="checkbox" class="rounded text-brand-600" />
+                <span><strong>Aadhaar Card</strong> (Name &amp; DOB matching 10th Marksheet)</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <input type="checkbox" class="rounded text-brand-600" />
+                <span><strong>10th &amp; 12th Marksheet + Certificate</strong> (Original + DigiLocker)</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <input type="checkbox" class="rounded text-brand-600" />
+                <span><strong>Caste / EWS / Domicile Certificate</strong> (Valid Financial Year)</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <input type="checkbox" class="rounded text-brand-600" />
+                <span><strong>OTR Registration</strong> (SSC / UPSC / UPPSC / BPSC One-Time Registration)</span>
+              </label>
+            </div>
+          </div>
+        `);
+      }
+    }
+
+    function openAdminModal() {
+      openModal('Update / Sync Portal Data (All Sections)', `
+        <div class="space-y-4">
+          <div class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 text-xs text-emerald-900 dark:text-emerald-200">
+            <strong>Live Updates Ready:</strong> Add any new Job, Admit Card, Result, Last Date, or Correction update below — it appears immediately on your portal and saves locally. You can also export <code>updates.json</code> for your Cloudflare Pages hosting.
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold mb-1">Target Section</label>
+              <select id="admSection" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                <option value="lastDate">Last Date Alert</option>
+                <option value="correction">Correction Date / Edit Form</option>
+                <option value="jobs">Top Online Form</option>
+                <option value="admit">Admit Card</option>
+                <option value="result">Result</option>
+                <option value="answer">Answer Keys</option>
+                <option value="syllabus">Syllabus</option>
+                <option value="admission">Admission Form</option>
+                <option value="verification">Documents Verification</option>
+                <option value="diploma">Diploma / ITI</option>
+                <option value="outsourcing">Outsourcing Job</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Badge / Date Pill</label>
+              <input id="admBadge" type="text" value="NEW" placeholder="e.g. 25 NOV, LAST DATE" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">Notification Title</label>
+            <input id="admTitle" type="text" placeholder="e.g. SSC GD Constable Online Form 2027" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold mb-1">Official Portal URL</label>
+              <input id="admUrl" type="url" value="https://ssc.gov.in/" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Last Date / Exam Date</label>
+              <input id="admLastDate" type="text" placeholder="e.g. 15 Dec 2026" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">Short Information</label>
+            <textarea id="admInfo" rows="2" placeholder="Vacancy count, eligibility, or key update..." class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm"></textarea>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button id="admAddBtn" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition">+ Publish to Portal</button>
+            <button id="admExportBtn" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition">Export JSON</button>
+          </div>
+        </div>
+      `);
+
+      document.getElementById('admAddBtn').addEventListener('click', () => {
+        const section = document.getElementById('admSection').value;
+        const title = document.getElementById('admTitle').value.trim();
+        const badge = document.getElementById('admBadge').value.trim() || 'NEW';
+        const url = document.getElementById('admUrl').value.trim() || 'https://india.gov.in/';
+        const lastDate = document.getElementById('admLastDate').value.trim() || 'Check Portal';
+        const info = document.getElementById('admInfo').value.trim() || title;
+        if (!title) { showToast('Please enter a notification title'); return; }
+
+        const item = {
+          id: 'custom-' + Date.now(),
+          section,
+          title,
+          badge,
+          tag: badge,
+          filter: ['all'],
+          shortInfo: info,
+          dates: { start: '25 Nov 2026', lastDate, examDate: 'As per Notice' },
+          fee: 'Check Official Notice',
+          age: 'As per Rules',
+          vacancies: 'See Notification',
+          officialUrl: url
+        };
+        state.customItems.unshift(item);
+        if (section === 'lastDate') LAST_DATE_ITEMS.unshift(item);
+        else if (section === 'correction') CORRECTION_ITEMS.unshift(item);
+        else {
+          const sec = SECTIONS.find(s => s.id === section);
+          if (sec) sec.items.unshift(item);
+        }
+        persistState();
+        renderAll();
+        closeModal();
+        showToast('New update published to portal!');
+      });
+
+      document.getElementById('admExportBtn').addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify({ updatedAt: new Date().toISOString(), customItems: state.customItems }, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'updates.json';
+        a.click();
+        showToast('Exported updates.json!');
+      });
+    }
+
+    function openSavedModal() {
+      const map = getAllItemsMap();
+      const items = state.savedIds.map(id => map.get(id)).filter(Boolean);
+      if (items.length === 0) {
+        openModal('Saved Bookmarks (0)', `<p class="text-slate-500 text-center py-6">You haven't bookmarked any jobs or admit cards yet. Click the bookmark icon on any listing to save it here.</p>`);
+        return;
+      }
+      openModal(`Saved Bookmarks (${items.length})`, `
+        <div class="divide-y divide-slate-200 dark:divide-slate-700">
+          ${items.map(it => `
+            <div class="py-3 flex items-center justify-between gap-3">
+              <button data-modal-open-id="${it.id}" class="text-left font-semibold text-sm hover:text-brand-600">${it.title}</button>
+              <button data-modal-remove-id="${it.id}" class="text-xs font-bold text-red-600 hover:underline shrink-0">Remove</button>
+            </div>
+          `).join('')}
+        </div>
+      `);
+      document.querySelectorAll('[data-modal-open-id]').forEach(b => {
+        b.addEventListener('click', () => openItemDetail(b.dataset.modalOpenId));
+      });
+      document.querySelectorAll('[data-modal-remove-id]').forEach(b => {
+        b.addEventListener('click', () => {
+          toggleSaveItem(b.dataset.modalRemoveId);
+          renderAll();
+          openSavedModal();
+        });
+      });
+    }
+
+    function openFooterPage(page) {
+      const pages = {
+        about: { title: 'About Latest Job Alert', body: 'Latest Job Alert is an independent Indian government job and exam information portal designed for fast, clutter-free access to Sarkari Result, Latest Govt Jobs, Admit Cards, Answer Keys, Admissions, and integrated GreenPix Labs tools.' },
+        contact: { title: 'Contact Us', body: 'For corrections, official notification updates, or feedback, reach out via our official YouTube channel (@officiallatestjobalert) or community channels.' },
+        disclaimer: { title: 'Disclaimer', body: 'Latest Job Alert is not a government organization. All recruitment notices, admit cards, and results link directly to official .gov.in / .nic.in portals. Candidates must verify details on the respective official website before applying.' },
+        privacy: { title: 'Privacy Policy', body: 'Latest Job Alert respects your privacy. Bookmarks and local updates are stored in your browser. Third-party advertising partners such as Google AdSense may use cookies to serve relevant ads.' },
+        sitemap: { title: 'Site Map', body: 'Sections: Last Date Alert • Correction Date • Result • Admit Card • Top Online Form • Answer Keys • Syllabus • Admission Form • Documents Verification • Diploma / ITI • Outsourcing Job • GreenPix Labs Tools.' }
+      };
+      const p = pages[page];
+      if (!p) return;
+      try { history.replaceState(null, '', '#/' + page); } catch (e) {}
+      document.getElementById('homeViewWrapper').classList.add('hidden');
+      const pageWrap = document.getElementById('pageViewContainer');
+      pageWrap.classList.remove('hidden');
+      pageWrap.innerHTML = `
+        <div class="flex items-center justify-between">
+          <button type="button" id="fpBackHomeBtn" class="text-xs font-bold text-brand-700 dark:text-rose-400 hover:underline inline-flex items-center gap-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home
+          </button>
+          <span class="text-[11px] font-mono text-slate-400">/${page}.html</span>
+        </div>
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm space-y-3">
+          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">${p.title}</h1>
+          <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${p.body}</p>
+        </article>
+      `;
+      if (window.lucide) lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('fpBackHomeBtn').addEventListener('click', showHomeView);
+    }
+
+    // =========================================================================
+    // 7. EVENT LISTENERS & INITIALIZATION
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      if (state.dark) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeLabel').textContent = 'Light';
+      }
+
+      if (state.alertsEnabled) {
+        document.getElementById('notifyBtnText').textContent = 'Alerts On';
+      }
+
+      // Event Delegation for dynamic items
+      document.body.addEventListener('click', (e) => {
+        const gpxBtn = e.target.closest('[data-gpx-url]');
+        if (gpxBtn) {
+          openGpxPopup(gpxBtn.dataset.gpxUrl, gpxBtn.dataset.gpxTitle || 'GreenPix Labs Tool');
+          return;
+        }
+        const openBtn = e.target.closest('[data-open-id]');
+        if (openBtn) {
+          openItemDetail(openBtn.dataset.openId);
+          return;
+        }
+        const saveBtn = e.target.closest('[data-save-id]');
+        if (saveBtn) {
+          toggleSaveItem(saveBtn.dataset.saveId);
+          renderAll();
+          return;
+        }
+        const toggleSecBtn = e.target.closest('[data-toggle-sec]');
+        if (toggleSecBtn) {
+          const sid = toggleSecBtn.dataset.toggleSec;
+          if (state.expandedSections.has(sid)) state.expandedSections.delete(sid);
+          else state.expandedSections.add(sid);
+          renderAll();
+          return;
+        }
+      });
+
+      // Top Nav Tabs — Smooth-scroll directly to the target section (just like Free Tools!)
+      const navScrollTargets = {
+        all: 'top',
+        admit: 'sec-admit',
+        hot: 'highlightSection',
+        result: 'sec-result',
+        jobs: 'sec-jobs',
+        sarkari: 'prioritySpotlightSection',
+        answer: 'sec-answer'
+      };
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const navKey = tab.dataset.nav;
+          state.activeNav = 'all';
+          showHomeView();
+          document.querySelectorAll('.nav-tab').forEach(t => {
+            t.classList.remove('bg-brand-600', 'text-white');
+            t.classList.add('text-slate-200');
+          });
+          tab.classList.add('bg-brand-600', 'text-white');
+          tab.classList.remove('text-slate-200');
+          renderAll();
+          const targetId = navScrollTargets[navKey];
+          if (targetId === 'top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (targetId) {
+            const el = document.getElementById(targetId);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Filter Chips
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          state.activeFilter = chip.dataset.filter;
+          document.querySelectorAll('.filter-chip').forEach(c => {
+            c.classList.remove('bg-navy-900', 'text-white', 'dark:bg-white', 'dark:text-slate-900');
+            c.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-200');
+          });
+          chip.classList.add('bg-navy-900', 'text-white', 'dark:bg-white', 'dark:text-slate-900');
+          chip.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-200');
+          renderAll();
+        });
+      });
+
+      // Search Input
+      const searchInput = document.getElementById('globalSearchInput');
+      const clearBtn = document.getElementById('clearSearchBtn');
+      searchInput.addEventListener('input', () => {
+        state.searchQuery = searchInput.value;
+        clearBtn.classList.toggle('hidden', !state.searchQuery);
+        renderAll();
+      });
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        state.searchQuery = '';
+        clearBtn.classList.add('hidden');
+        renderAll();
+      });
+
+      function resetAllFilters() {
+        state.activeNav = 'all';
+        state.activeFilter = 'all';
+        state.searchQuery = '';
+        searchInput.value = '';
+        clearBtn.classList.add('hidden');
+        document.querySelector('.nav-tab[data-nav="all"]').click();
+        document.querySelector('.filter-chip[data-filter="all"]').click();
+      }
+      document.getElementById('resetAllFiltersBtn').addEventListener('click', resetAllFilters);
+      document.getElementById('emptyResetBtn').addEventListener('click', resetAllFilters);
+
+      // Tools
+      document.getElementById('openNameDatePhotoBtn').addEventListener('click', openNameDatePhotoModal);
+      document.getElementById('navToolsJumpBtn').addEventListener('click', () => { showHomeView(); setTimeout(() => document.getElementById('toolsSection').scrollIntoView({ behavior: 'smooth', block: 'start' }), 40); });
+      document.querySelectorAll('.tool-trigger').forEach(btn => {
+        btn.addEventListener('click', () => openToolModal(btn.dataset.tool));
+      });
+
+      // Dark Mode Toggle
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        state.dark = !state.dark;
+        document.documentElement.classList.toggle('dark', state.dark);
+        document.getElementById('themeLabel').textContent = state.dark ? 'Light' : 'Dark';
+        persistState();
+      });
+
+      // Language Toggle
+      document.getElementById('langToggleBtn').addEventListener('click', () => {
+        state.lang = state.lang === 'en' ? 'hi' : 'en';
+        document.getElementById('langLabel').textContent = state.lang === 'en' ? 'हिंदी' : 'English';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.dataset.i18n;
+          if (I18N[state.lang][key]) el.textContent = I18N[state.lang][key];
+        });
+        renderAll();
+      });
+
+      // Saved Modal
+      document.getElementById('openAdminBtn').addEventListener('click', openAdminModal);
+      document.getElementById('openSavedBtn').addEventListener('click', openSavedModal);
+
+      // Social & Alert Buttons
+      document.getElementById('joinWhatsappBtn').addEventListener('click', () => {
+        openModal('Join Latest Job Alert WhatsApp Channel', `<p class="text-slate-700 dark:text-slate-300">Get instant daily alerts for Bihar, UP &amp; Central Govt Jobs, Admit Cards, and Results directly on WhatsApp. Link your official WhatsApp Channel URL here when deploying.</p>`);
+      });
+      document.getElementById('joinTelegramBtn').addEventListener('click', () => {
+        openModal('Join Latest Job Alert Telegram Channel', `<p class="text-slate-700 dark:text-slate-300">Get free notification PDFs, syllabus PDFs, and daily current affairs on Telegram. Link your official Telegram Channel URL here when deploying.</p>`);
+      });
+      document.querySelectorAll('.social-link-btn').forEach(btn => {
+        btn.addEventListener('click', () => showToast(`Connect your ${btn.dataset.social} link in deployment settings.`));
+      });
+      document.getElementById('notifyToggleBtn').addEventListener('click', () => {
+        state.alertsEnabled = !state.alertsEnabled;
+        document.getElementById('notifyBtnText').textContent = state.alertsEnabled ? 'Alerts On' : 'Enable Alerts';
+        persistState();
+        showToast(state.alertsEnabled ? 'Job Alert notifications enabled!' : 'Job Alert notifications paused.');
+      });
+
+      // Footer Pages
+      document.querySelectorAll('.footer-page-btn').forEach(btn => {
+        btn.addEventListener('click', () => openFooterPage(btn.dataset.page));
+      });
+
+      // Modal Close
+      document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      // Back to Top
+      const backBtn = document.getElementById('backToTopBtn');
+      window.addEventListener('scroll', () => {
+        backBtn.classList.toggle('hidden', window.scrollY < 300);
+      });
+      backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      renderAll();
+    });
+  </script>
+</body>
+</html>
