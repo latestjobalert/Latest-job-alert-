@@ -3,7 +3,6 @@ import json
 import os
 import re
 import urllib.request
-import urllib.error
 import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -63,7 +62,7 @@ def gather_raw_signals():
         with urllib.request.urlopen(req, timeout=20) as resp:
             xml_data = resp.read()
         root = ET.fromstring(xml_data)
-        for item in root.findall('./channel/item')[:8]:
+        for item in root.findall('./channel/item')[:6]:
             t = (item.findtext('title') or '').split(' - ')[0].strip()
             d = (item.findtext('pubDate') or '')[:16]
             if t:
@@ -74,20 +73,20 @@ def create_posts_with_gemini(api_key, raw_signals):
     today = datetime.now(timezone.utc).strftime('%d %B %Y')
     prompt = (
         f"Today is {today}. Here are recent Indian exam headlines:\n{raw_signals}\n\n"
-        "Select ONLY genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
-        "Last Date Alerts, Form Correction Windows, Admissions, Scholarships, or ITI/Apprentice updates. "
-        "Write completely original, plagiarism-free entries in clean English.\n"
-        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array (max 8 items), each having:\n'
+        "Select up to 4 genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
+        "Last Date Alerts, or Form Correction Windows. Write 100% original, plagiarism-free content.\n"
+        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:\n'
         '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
         '- "title": clean concise exam/post title\n'
         '- "badge": short pill (e.g. "NEW", "OUT", "LAST DATE", "KEY OUT")\n'
-        '- "shortInfo": 2 original sentences summarizing the update clearly\n'
+        '- "shortInfo": 2 original sentences summarizing the update\n'
         '- "startDate": string\n'
         '- "lastDate": string\n'
         '- "examDate": string\n'
         '- "fee": string\n'
         '- "age": string\n'
-        '- "vacancies": string'
+        '- "vacancies": string\n'
+        '- "detailedArticle": A detailed, 100% original 800-1000 word article in plain HTML (<p>, <h3>, <ul>, <li>) covering Overview, Key Highlights, Eligibility/Criteria, Selection Process, Step-by-Step Guide, Preparation Tips, and 4 FAQs.'
     )
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}]
@@ -97,17 +96,15 @@ def create_posts_with_gemini(api_key, raw_signals):
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
         req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 res = json.loads(resp.read().decode('utf-8'))
             print(f'Original posts created by Gemini model: {model}')
             text = res['candidates'][0]['content']['parts'][0]['text']
             m = re.search(r'\{[\s\S]*\}', text)
             return json.loads(m.group(0)).get('updates', []) if m else []
-        timeout=60
-            print(f'{model} HTTP {e.code}')
-            if e.code in (404, 429, 503):
-                continue
-            raise
+        except Exception as e:
+            print(f'{model} skipped ({e})')
+            continue
     return []
 
 def main():
@@ -146,6 +143,7 @@ def main():
             'tag': u.get('badge', 'NEW'),
             'filter': ['all'],
             'shortInfo': u.get('shortInfo', title),
+            'detailedArticle': u.get('detailedArticle', ''),
             'dates': {
                 'start': u.get('startDate', 'Check Portal'),
                 'lastDate': u.get('lastDate', 'Check Portal'),
