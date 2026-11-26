@@ -14,7 +14,7 @@ DATA_FILE = ROOT / 'data' / 'portal_data.json'
 if not DATA_FILE.exists() and (ROOT / 'Data' / 'portal_data.json').exists():
     DATA_FILE = ROOT / 'Data' / 'portal_data.json'
 
-MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite']
+MODELS = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash']
 
 OFFICIAL_PORTALS = [
     (['ssc', 'chsl', 'cgl', 'mts', 'ssc gd', 'ssc je', 'cpo'], 'https://ssc.gov.in/', 'https://ssc.gov.in/login'),
