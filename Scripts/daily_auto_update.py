@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import time
 import urllib.request
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -13,72 +14,94 @@ DATA_FILE = ROOT / 'data' / 'portal_data.json'
 if not DATA_FILE.exists() and (ROOT / 'Data' / 'portal_data.json').exists():
     DATA_FILE = ROOT / 'Data' / 'portal_data.json'
 
-MODELS = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash']
+MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash']
 
-OFFICIAL_PORTALS = [
-    (['ssc', 'chsl', 'cgl', 'mts', 'ssc gd', 'ssc je', 'cpo'], 'https://ssc.gov.in/', 'https://ssc.gov.in/login'),
-    (['upsc', 'nda', 'cds', 'ias', 'cse', 'cisf'], 'https://www.upsc.gov.in/', 'https://upsconline.nic.in/'),
-    (['rrb', 'railway', 'ntpc', 'alp', 'group d', 'paramedical', 'station master'], 'https://indianrailways.gov.in/', 'https://www.rrbapply.gov.in/'),
-    (['ibps'], 'https://www.ibps.in/', 'https://www.ibps.in/'),
-    (['sbi'], 'https://sbi.co.in/web/careers', 'https://sbi.co.in/web/careers'),
-    (['bpsc'], 'https://bpsc.bihar.gov.in/', 'https://onlinebpsc.bihar.gov.in/'),
-    (['bssc'], 'https://bssc.bihar.gov.in/', 'https://bssc.bihar.gov.in/'),
-    (['csbc', 'bihar police'], 'https://csbc.bihar.gov.in/', 'https://csbc.bihar.gov.in/'),
-    (['bseb', 'bihar board'], 'https://biharboardonline.bihar.gov.in/', 'https://biharboardonline.bihar.gov.in/'),
-    (['pms', 'post matric'], 'https://pmsonline.bihar.gov.in/', 'https://scstpmsonline.bihar.gov.in/'),
-    (['upsssc'], 'https://upsssc.gov.in/', 'https://upsssc.gov.in/'),
-    (['uppsc'], 'https://uppsc.up.nic.in/', 'https://uppsc.up.nic.in/CandidatePages/Notifications.aspx'),
-    (['upessc'], 'https://upessc.up.gov.in/', 'https://upessc.up.gov.in/'),
-    (['up police', 'upprpb'], 'https://uppbpb.gov.in/', 'https://uppbpb.gov.in/'),
-    (['up scholarship'], 'https://scholarship.up.gov.in/', 'https://scholarship.up.gov.in/'),
-    (['dsssb'], 'https://dsssb.delhi.gov.in/', 'https://dsssb.delhi.gov.in/'),
-    (['jee main'], 'https://jeemain.nta.nic.in/', 'https://jeemain.nta.nic.in/online-application-form-for-jee-main-2027-session-1/'),
-    (['neet'], 'https://neet.nta.nic.in/', 'https://neet.nta.nic.in/'),
-    (['ugc net'], 'https://ugcnet.nta.ac.in/', 'https://ugcnet.nta.ac.in/'),
-    (['nta', 'cuet', 'cmat', 'nift', 'aissee'], 'https://nta.ac.in/', 'https://nta.ac.in/NoticeBoardArchive'),
-    (['ctet'], 'https://ctet.nic.in/', 'https://ctet.nic.in/'),
-    (['nielit', 'ccc'], 'https://student.nielit.gov.in/', 'https://student.nielit.gov.in/'),
-    (['iocl'], 'https://iocl.com/', 'https://iocl.com/'),
-]
+OFFICIAL_DOMAINS = ('.gov.in', '.nic.in', '.ac.in', 'ibps.in', 'rrbapply.gov.in', 'cdn.digialm.com', 'iocl.com', 'sbi.co.in')
 
-def resolve_official_url(title, target):
+def is_official_url(u):
+    u_low = (u or '').lower()
+    return u_low.startswith('https://') and any(d in u_low for d in OFFICIAL_DOMAINS)
+
+def discover_official_links(title):
+    """Find real official .gov.in / .nic.in / .pdf URLs for a specific exam title."""
+    found = []
+    try:
+        q = f"{title} official site:gov.in OR site:nic.in OR filetype:pdf"
+        url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(q)}"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            body = resp.read().decode('utf-8', errors='ignore')
+        raw_links = re.findall(r'uddg=([^&"]+)', body)
+        for enc in raw_links:
+            decoded = urllib.parse.unquote(enc)
+            if is_official_url(decoded) and decoded not in found:
+                found.append(decoded)
+            if len(found) >= 5:
+                break
+    except Exception:
+        pass
+    return found
+
+def classify_target(title):
     t = title.lower()
-    for keywords, home_url, deep_url in OFFICIAL_PORTALS:
-        if any(k in t for k in keywords):
-            if 'ssc' in keywords and target == 'result':
-                return home_url, 'https://ssc.gov.in/home/candidate-result'
-            return home_url, deep_url
-    return 'https://www.ncs.gov.in/', 'https://www.india.gov.in/'
+    if 'correction' in t or 'edit window' in t:
+        return 'correction', 'EDIT'
+    if 'extended' in t or 'last date' in t or 'closing' in t:
+        return 'lastDate', 'EXTENDED' if 'extended' in t else 'LAST DATE'
+    if 'admit card' in t or 'hall ticket' in t or 'city slip' in t:
+        return 'admit', 'ADMIT CARD'
+    if 'answer key' in t or 'objection' in t:
+        return 'answer', 'KEY OUT'
+    if 'result' in t or 'score card' in t or 'merit list' in t:
+        return 'result', 'RESULT'
+    if 'syllabus' in t or 'exam pattern' in t:
+        return 'syllabus', 'SYLLABUS'
+    if 'apprentice' in t or 'iti' in t or 'diploma' in t:
+        return 'diploma', 'ITI/DIPLOMA'
+    if 'scholarship' in t:
+        return 'verification', 'SCHOLARSHIP'
+    if 'admission' in t or 'jee' in t or 'neet' in t or 'cuet' in t:
+        return 'admission', 'ADMISSION'
+    return 'jobs', 'NEW'
 
 def gather_raw_signals():
     queries = [
         'SSC OR RRB OR BPSC OR UPSSSC Admit Card Result Answer Key 2026',
-        'UPSC OR IBPS OR SBI OR NTA Recruitment Notification 2026 India'
+        'UPSC OR IBPS OR SBI OR NTA OR UPTET Recruitment Notification 2026 India'
     ]
-    signals = []
+    raw_list = []
     for q in queries:
         rss_url = f"https://news.google.com/rss/search?q={urllib.parse.quote(q)}&hl=en-IN&gl=IN&ceid=IN:en"
         req = urllib.request.Request(rss_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=20) as resp:
             xml_data = resp.read()
         root = ET.fromstring(xml_data)
-        for item in root.findall('./channel/item')[:6]:
+        for item in root.findall('./channel/item')[:5]:
             t = (item.findtext('title') or '').split(' - ')[0].strip()
-            d = (item.findtext('pubDate') or '')[:16]
+            d = (item.findtext('pubDate') or 'Today')[:16]
             if t:
-                signals.append(f"- {t} ({d})")
-    return "\n".join(signals)
+                links = discover_official_links(t)
+                raw_list.append((t, d, links))
+    return raw_list
 
-def create_posts_with_gemini(api_key, raw_signals):
+def create_posts_with_gemini(api_key, raw_list):
     today = datetime.now(timezone.utc).strftime('%d %B %Y')
+    lines = []
+    for t, d, links in raw_list:
+        links_str = ", ".join(links) if links else "None found"
+        lines.append(f"- Headline: {t} ({d}) | Official URLs found: {links_str}")
+    signals_txt = "\n".join(lines)
+
     prompt = (
-        f"Today is {today}. Here are recent Indian exam headlines:\n{raw_signals}\n\n"
-        "Select up to 4 genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
-        "Last Date Alerts, or Form Correction Windows. Write 100% original, plagiarism-free content.\n"
+        f"Today is {today}. Here are recent Indian exam headlines with discovered official URLs:\n{signals_txt}\n\n"
+        "Select up to 5 genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
+        "Last Date / Extended Notices, Syllabus, or Form Correction Windows. Write 100% original, plagiarism-free content.\n"
+        "CRITICAL LINK RULE: For each item, pick the exact deep URL from 'Official URLs found' (e.g. exact Apply/Admit/Result/Login URL for primaryUrl, exact .pdf notice URL for secondaryUrl if available, and main portal domain for officialUrl). NEVER use a third-party news/blog URL and NEVER invent a URL.\n"
         'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:\n'
         '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
+        '- "isMajor": boolean\n'
         '- "title": clean concise exam/post title\n'
-        '- "badge": short pill (e.g. "NEW", "OUT", "LAST DATE", "KEY OUT")\n'
+        '- "badge": short pill (e.g. "NEW", "OUT", "EXTENDED", "LAST DATE", "KEY OUT")\n'
         '- "shortInfo": 2 original sentences summarizing the update\n'
         '- "startDate": string\n'
         '- "lastDate": string\n'
@@ -86,32 +109,56 @@ def create_posts_with_gemini(api_key, raw_signals):
         '- "fee": string\n'
         '- "age": string\n'
         '- "vacancies": string\n'
-        '- "detailedArticle": A detailed, 100% original 800-1000 word article in plain HTML (<p>, <h3>, <ul>, <li>) covering Overview, Key Highlights, Eligibility/Criteria, Selection Process, Step-by-Step Guide, Preparation Tips, and 4 FAQs.'
+        '- "primaryUrl": exact deep action URL (Apply / Admit Card / Result / Answer Key)\n'
+        '- "secondaryUrl": exact official Notification PDF or notice URL\n'
+        '- "officialUrl": main official website homepage\n'
+        '- "detailedArticle": A detailed, 100% original 800-word article in plain HTML (<p>, <h3>, <ul>, <li>) covering Overview, Eligibility, Selection Process, Step-by-Step Guide, Tips, and 4 FAQs.'
     )
-    payload = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}]
-    }).encode('utf-8')
+    payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode('utf-8')
 
     for model in MODELS:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
-        req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
-        try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                res = json.loads(resp.read().decode('utf-8'))
-            print(f'Original posts created by Gemini model: {model}')
-            text = res['candidates'][0]['content']['parts'][0]['text']
-            m = re.search(r'\{[\s\S]*\}', text)
-            return json.loads(m.group(0)).get('updates', []) if m else []
-        except Exception as e:
-            print(f'{model} skipped ({e})')
-            continue
+        for attempt in range(2):
+            req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    res = json.loads(resp.read().decode('utf-8'))
+                print(f'Original posts & deep links selected by Gemini model: {model}')
+                text = res['candidates'][0]['content']['parts'][0]['text']
+                m = re.search(r'\{[\s\S]*\}', text)
+                return json.loads(m.group(0)).get('updates', []) if m else []
+            except Exception as e:
+                print(f'{model} attempt {attempt + 1} skipped ({e})')
+                time.sleep(2)
     return []
 
+def build_original_fallback(raw_list):
+    updates = []
+    for t, d, links in raw_list[:6]:
+        target, badge = classify_target(t)
+        pdf_link = next((l for l in links if '.pdf' in l.lower()), '')
+        deep_link = next((l for l in links if '.pdf' not in l.lower()), '') or pdf_link or 'https://www.india.gov.in/'
+        home_link = links[0] if links else 'https://www.india.gov.in/'
+        updates.append({
+            'target': target,
+            'isMajor': any(k in t.lower() for k in ('ssc', 'rrb', 'upsc', 'bpsc', 'upsssc', 'ibps', 'extended')),
+            'title': t,
+            'badge': badge,
+            'shortInfo': f"{t} update released on {d}. Candidates can check official dates, eligibility, and direct portal links below.",
+            'startDate': d,
+            'lastDate': 'Check Official Notice',
+            'examDate': 'As per Official Schedule',
+            'fee': 'As per Official Notice',
+            'age': 'As per Govt Rules',
+            'vacancies': 'See Official Notification',
+            'primaryUrl': deep_link,
+            'secondaryUrl': pdf_link or home_link,
+            'officialUrl': home_link,
+            'detailedArticle': ''
+        })
+    return updates
+
 def main():
-    api_key = os.environ.get('GEMINI_API_KEY', '').strip()
-    if not api_key:
-        print('GEMINI_API_KEY not set.')
-        return
     data = json.loads(DATA_FILE.read_text(encoding='utf-8'))
     existing_titles = set()
     for k in ('LAST_DATE_ITEMS', 'CORRECTION_ITEMS', 'HIGHLIGHTS'):
@@ -122,11 +169,15 @@ def main():
             existing_titles.add(it['title'].lower())
 
     try:
-        signals = gather_raw_signals()
-        updates = create_posts_with_gemini(api_key, signals)
+        raw_list = gather_raw_signals()
     except Exception as e:
-        print('Update warning (continuing build):', e)
+        print('Signal fetch warning:', e)
         return
+
+    api_key = os.environ.get('GEMINI_API_KEY', '').strip()
+    updates = create_posts_with_gemini(api_key, raw_list) if api_key else []
+    if not updates:
+        updates = build_original_fallback(raw_list)
 
     added = 0
     for idx, u in enumerate(updates):
@@ -135,7 +186,9 @@ def main():
             continue
         existing_titles.add(title.lower())
         target = u.get('target', 'jobs')
-        official_url, primary_url = resolve_official_url(title, target)
+        p_url = u.get('primaryUrl') if is_official_url(u.get('primaryUrl')) else 'https://www.india.gov.in/'
+        s_url = u.get('secondaryUrl') if is_official_url(u.get('secondaryUrl')) else p_url
+        o_url = u.get('officialUrl') if is_official_url(u.get('officialUrl')) else p_url
         item = {
             'id': f"auto-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M')}-{idx}",
             'title': title,
@@ -152,12 +205,16 @@ def main():
             'fee': u.get('fee', 'As per Official Notice'),
             'age': u.get('age', 'As per Govt Rules'),
             'vacancies': u.get('vacancies', 'See Notification'),
-            'officialUrl': official_url,
-            'primaryUrl': primary_url,
-            'secondaryUrl': official_url
+            'officialUrl': o_url,
+            'primaryUrl': p_url,
+            'secondaryUrl': s_url
         }
+
         if target == 'lastDate':
             data['LAST_DATE_ITEMS'].insert(0, item)
+            for sec in data['SECTIONS']:
+                if sec['id'] == 'jobs':
+                    sec['items'].insert(0, item)
         elif target == 'correction':
             data['CORRECTION_ITEMS'].insert(0, item)
         else:
@@ -165,11 +222,22 @@ def main():
                 if sec['id'] == target:
                     sec['items'].insert(0, item)
                     break
+
+        if u.get('isMajor') and target in ('jobs', 'lastDate'):
+            hl_item = dict(item)
+            hl_item['subtitle'] = f"{item['badge']} • Apply / Check"
+            hl_item['colorClass'] = 'from-red-600 to-rose-700'
+            hl_item['tags'] = ['all']
+            hl_list = [h for h in data.get('HIGHLIGHTS', []) if h.get('id') != 'hl-8']
+            hl_list.insert(0, hl_item)
+            hl_timer = [h for h in data.get('HIGHLIGHTS', []) if h.get('id') == 'hl-8']
+            data['HIGHLIGHTS'] = hl_list[:7] + hl_timer
+
         added += 1
 
     if added:
         DATA_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
-    print(f'Added {added} new Gemini-written updates.')
+    print(f'Added {added} new updates with deep official links.')
 
 if __name__ == '__main__':
     main()
