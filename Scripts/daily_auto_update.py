@@ -15,9 +15,7 @@ if not DATA_FILE.exists() and (ROOT / 'Data' / 'portal_data.json').exists():
     DATA_FILE = ROOT / 'Data' / 'portal_data.json'
 
 MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash']
-
 OFFICIAL_DOMAINS = ('.gov.in', '.nic.in', '.ac.in', 'ibps.in', 'rrbapply.gov.in', 'cdn.digialm.com', 'iocl.com', 'sbi.co.in')
-
 SKIP_KEYWORDS = (
     'previous year question', 'repeated question', 'most important question',
     'mock test', 'practice set', 'model paper', 'preparation tips', 'study plan',
@@ -25,8 +23,7 @@ SKIP_KEYWORDS = (
 )
 
 def clean_title(t):
-    t = re.sub(r'^(sarkari\s*jobs?|latest\s*news|breaking)\s*[:\-–]\s*', '', t, flags=re.IGNORECASE).strip()
-    return t
+    return re.sub(r'^(sarkari\s*jobs?|latest\s*news|breaking)\s*[:\-–]\s*', '', t, flags=re.IGNORECASE).strip()
 
 def is_valid_portal_item(title):
     t = title.lower()
@@ -53,8 +50,7 @@ def discover_official_links(title):
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=15) as resp:
             body = resp.read().decode('utf-8', errors='ignore')
-        raw_links = re.findall(r'uddg=([^&"]+)', body)
-        for enc in raw_links:
+        for enc in re.findall(r'uddg=([^&"]+)', body):
             decoded = urllib.parse.unquote(enc)
             if is_official_url(decoded) and decoded not in found:
                 found.append(decoded)
@@ -86,6 +82,21 @@ def classify_target(title):
         return 'admission', 'ADMISSION'
     return 'jobs', 'NEW'
 
+def call_gemini(api_key, prompt):
+    payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode('utf-8')
+    for model in MODELS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        for attempt in range(2):
+            req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    res = json.loads(resp.read().decode('utf-8'))
+                return res['candidates'][0]['content']['parts'][0]['text'], model
+            except Exception as e:
+                print(f'{model} attempt {attempt + 1} skipped ({e})')
+                time.sleep(2)
+    return '', ''
+
 def gather_raw_signals():
     queries = [
         'SSC OR RRB OR BPSC OR UPSSSC Admit Card Result Answer Key 2026',
@@ -102,63 +113,41 @@ def gather_raw_signals():
             t = clean_title((item.findtext('title') or '').split(' - ')[0])
             d = (item.findtext('pubDate') or 'Today')[:16]
             if is_valid_portal_item(t):
-                links = discover_official_links(t)
-                raw_list.append((t, d, links))
+                raw_list.append((t, d, discover_official_links(t)))
     return raw_list
 
 def create_posts_with_gemini(api_key, raw_list):
     today = datetime.now(timezone.utc).strftime('%d %B %Y')
-    lines = []
-    for t, d, links in raw_list:
-        links_str = ", ".join(links) if links else "None found"
-        lines.append(f"- Headline: {t} ({d}) | Official URLs found: {links_str}")
-    signals_txt = "\n".join(lines)
-
+    lines = [f"- {t} ({d}) | URLs: {', '.join(links) if links else 'None'}" for t, d, links in raw_list]
     prompt = (
-        f"Today is {today}. Here are recent Indian exam headlines with discovered official URLs:\n{signals_txt}\n\n"
-        "Select ONLY genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
-        "Last Date / Extended Notices, Syllabus, or Form Correction Windows. "
-        "STRICTLY EXCLUDE previous year question papers, repeated questions, mock tests, preparation tips, or any 'SARKARI JOBS:' prefix. "
-        "Write 100% original, plagiarism-free content.\n"
-        "CRITICAL LINK RULE: Pick the exact deep URL from 'Official URLs found' (exact Apply/Admit/Result/Login URL for primaryUrl, exact .pdf notice URL for secondaryUrl if available, and main portal domain for officialUrl). NEVER use a third-party news/blog URL and NEVER invent a URL.\n"
-        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array (max 5 items), each having:\n'
-        '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
-        '- "isMajor": boolean\n'
-        '- "title": clean concise exam/post title (NO "SARKARI JOBS:" prefix)\n'
-        '- "badge": short pill (e.g. "NEW", "OUT", "EXTENDED", "LAST DATE", "KEY OUT")\n'
-        '- "shortInfo": 2 original sentences summarizing the update\n'
-        '- "startDate": string\n'
-        '- "lastDate": string\n'
-        '- "examDate": string\n'
-        '- "fee": string\n'
-        '- "age": string\n'
-        '- "vacancies": string\n'
-        '- "primaryUrl": exact deep action URL\n'
-        '- "secondaryUrl": exact official Notification PDF or notice URL\n'
-        '- "officialUrl": main official website homepage\n'
-        '- "detailedArticle": A detailed, 100% original 800-word article in plain HTML (<p>, <h3>, <ul>, <li>) covering Overview, Eligibility, Selection Process, Step-by-Step Guide, Tips, and 4 FAQs.'
+        f"Today is {today}. Headlines:\n" + "\n".join(lines) + "\n\n"
+        "Select up to 4 genuine Indian Govt Job notifications, Admit Cards, Results, Answer Keys, Extended Notices, Syllabus, or Corrections. "
+        "Exclude question papers, mock tests, or 'SARKARI JOBS:' prefix.\n"
+        "Pick primaryUrl, secondaryUrl (.pdf if any), and officialUrl ONLY from the official URLs listed.\n"
+        'Return ONLY valid JSON: {"updates": [{"target":"jobs|admit|result|answer|lastDate|correction|syllabus|admission|verification|diploma|outsourcing","isMajor":true,"title":"...","badge":"NEW","shortInfo":"...","startDate":"...","lastDate":"...","examDate":"...","fee":"...","age":"...","vacancies":"...","primaryUrl":"...","secondaryUrl":"...","officialUrl":"..."}]}'
     )
-    payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode('utf-8')
+    text, model = call_gemini(api_key, prompt)
+    if not text:
+        return []
+    print(f'Selected updates using {model}')
+    m = re.search(r'\{[\s\S]*\}', text)
+    updates = json.loads(m.group(0)).get('updates', []) if m else []
 
-    for model in MODELS:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
-        for attempt in range(2):
-            req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json'})
-            try:
-                with urllib.request.urlopen(req, timeout=60) as resp:
-                    res = json.loads(resp.read().decode('utf-8'))
-                print(f'Original posts & deep links selected by Gemini model: {model}')
-                text = res['candidates'][0]['content']['parts'][0]['text']
-                m = re.search(r'\{[\s\S]*\}', text)
-                return json.loads(m.group(0)).get('updates', []) if m else []
-            except Exception as e:
-                print(f'{model} attempt {attempt + 1} skipped ({e})')
-                time.sleep(2)
-    return []
+    # Generate separate 800-1000 word article per post (reliable, never breaks JSON!)
+    for u in updates:
+        art_prompt = (
+            f"Write an 800-1000 word, 100% original, plagiarism-free, SEO-friendly guide in clean HTML (<p>, <h3>, <ul>, <li>) for Indian exam aspirants on:\n"
+            f"Title: {u.get('title')}\nSummary: {u.get('shortInfo')}\nDates: {u.get('startDate')} to {u.get('lastDate')}, Exam: {u.get('examDate')}\n"
+            "Include: 1) Detailed Overview, 2) Key Highlights, 3) Eligibility & Selection Process, 4) Step-by-Step How to Apply/Download, 5) Document Preparation Tips, and 6) 5 Helpful FAQs. Return ONLY HTML tags (no markdown fences)."
+        )
+        art_html, _ = call_gemini(api_key, art_prompt)
+        art_html = re.sub(r'^```html|```$', '', art_html.strip(), flags=re.IGNORECASE).strip()
+        u['detailedArticle'] = art_html
+    return updates
 
 def build_original_fallback(raw_list):
     updates = []
-    for t, d, links in raw_list[:5]:
+    for t, d, links in raw_list[:4]:
         target, badge = classify_target(t)
         pdf_link = next((l for l in links if '.pdf' in l.lower()), '')
         deep_link = next((l for l in links if '.pdf' not in l.lower()), '') or pdf_link or 'https://www.india.gov.in/'
@@ -261,7 +250,7 @@ def main():
 
     if added:
         DATA_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
-    print(f'Added {added} new clean updates with deep official links.')
+    print(f'Added {added} new updates with full articles.')
 
 if __name__ == '__main__':
     main()
