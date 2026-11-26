@@ -680,6 +680,50 @@
       "accent": "bg-blue-700",
       "items": [
         {
+          "id": "auto-202611260506-3",
+          "title": "SSC CPO Admit Card 2026 (OUT): Download SI Tier 2 Hall Ticket PDF at ssc.gov.in",
+          "badge": "ADMIT CARD",
+          "tag": "ADMIT CARD",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "SSC CPO Admit Card 2026 (OUT): Download SI Tier 2 Hall Ticket PDF at ssc.gov.in update released on Wed, 25 Nov 2026. Candidates can check official dates, eligibility, and direct portal links below.",
+          "detailedArticle": "",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Official Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Official Notification",
+          "officialUrl": "https://www.india.gov.in/",
+          "primaryUrl": "https://www.india.gov.in/",
+          "secondaryUrl": "https://www.india.gov.in/"
+        },
+        {
+          "id": "auto-202611260506-0",
+          "title": "UPSSSC Cane Supervisor Admit Card 2026 (OUT): Download Mains Hall Ticket PDF at upsssc.gov.in",
+          "badge": "ADMIT CARD",
+          "tag": "ADMIT CARD",
+          "filter": [
+            "all"
+          ],
+          "shortInfo": "UPSSSC Cane Supervisor Admit Card 2026 (OUT): Download Mains Hall Ticket PDF at upsssc.gov.in update released on Wed, 25 Nov 2026. Candidates can check official dates, eligibility, and direct portal links below.",
+          "detailedArticle": "",
+          "dates": {
+            "start": "Wed, 25 Nov 2026",
+            "lastDate": "Check Official Notice",
+            "examDate": "As per Official Schedule"
+          },
+          "fee": "As per Official Notice",
+          "age": "As per Govt Rules",
+          "vacancies": "See Official Notification",
+          "officialUrl": "https://www.india.gov.in/",
+          "primaryUrl": "https://www.india.gov.in/",
+          "secondaryUrl": "https://www.india.gov.in/"
+        },
+        {
           "id": "auto-202611260450-0",
           "title": "SSC CHSL Tier 1 Exam City Intimation Slip 2026",
           "badge": "CITY SLIP OUT",
