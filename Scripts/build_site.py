@@ -2,7 +2,7 @@
 import html as html_lib
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,7 +15,10 @@ POSTS_DIR = ROOT / 'posts'
 POSTS_DIR.mkdir(parents=True, exist_ok=True)
 
 SITE_BASE_URL = 'https://latestjobalert.pages.dev'
-TODAY_STR = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+IST_TZ = timezone(timedelta(hours=5, minutes=30))
+NOW_IST = datetime.now(IST_TZ)
+TODAY_STR = NOW_IST.strftime('%Y-%m-%d')
+UPDATED_LABEL_IST = NOW_IST.strftime('%d %b %Y, %I:%M %p IST')
 
 DEFAULT_SYLLABUS = {
     'syl-1': {
@@ -69,6 +72,48 @@ def slugify(text, item_id):
     s = re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
     s = re.sub(r'-+', '-', s)[:60].strip('-')
     return f"{s}-{item_id}"
+
+def format_post_time_ist(it):
+    dt = None
+    if it.get('addedAt'):
+        try:
+            dt = datetime.fromisoformat(it['addedAt'].replace('Z', '+00:00'))
+        except Exception:
+            dt = None
+    if dt is None and it.get('id'):
+        m = re.match(r'^auto-(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})', it['id'])
+        if m:
+            dt = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)), tzinfo=timezone.utc)
+    if dt is None:
+        return UPDATED_LABEL_IST
+    return dt.astimezone(IST_TZ).strftime('%d %b %Y, %I:%M %p IST')
+
+def build_article_block(it, cat_title):
+    custom_html = (it.get('detailedArticle') or '').strip()
+    if custom_html:
+        return f'''<div class="rounded-xl border border-slate-200 p-5 bg-white space-y-3 prose max-w-none text-sm text-slate-700 leading-relaxed">
+          <h2 class="text-base font-extrabold text-slate-900 border-b pb-2">Complete Details &amp; Candidate Guide</h2>
+          {custom_html}
+        </div>'''
+
+    title_esc = html_lib.escape(it['title'])
+    cat_esc = html_lib.escape(cat_title)
+    short_esc = html_lib.escape(it.get('shortInfo') or it['title'])
+    dates = it.get('dates') or {}
+    last_d = html_lib.escape(dates.get('lastDate', 'Check Official Portal'))
+    return f'''<div class="rounded-xl border border-slate-200 p-5 bg-white space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+      <h2 class="text-base font-extrabold text-slate-900 border-b pb-2">Complete Overview &amp; Candidate Guide — {title_esc}</h2>
+      <p>{short_esc} Aspirants following the <strong>{cat_esc}</strong> schedule should review all official instructions carefully before taking the next step.</p>
+      <h3 class="font-bold text-slate-900 pt-1">Key Instructions &amp; Document Checklist</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Verify your name, father's name, and date of birth against your Class 10th marksheet before submitting or downloading.</li>
+        <li>Keep scanned passport photo (20KB–50KB), signature (10KB–20KB), and ID/category certificates ready in PDF format.</li>
+        <li>Always check the official portal before the deadline (<strong>{last_d}</strong>) to avoid last-minute server traffic.</li>
+      </ul>
+      <h3 class="font-bold text-slate-900 pt-1">Frequently Asked Questions (FAQs)</h3>
+      <p><strong>Q1. Where is the official link for {title_esc}?</strong><br/>You can access the direct official action link and department homepage in the Important Official Links table below.</p>
+      <p><strong>Q2. What is the deadline or exam window?</strong><br/>The active window listed in the notification is <strong>{last_d}</strong>. Always confirm updates on the official website.</p>
+    </div>'''
 
 def build_syllabus_block(it):
     syl_rows = []
@@ -166,6 +211,7 @@ def main():
     idx_html = INDEX_TPL.read_text(encoding='utf-8')
     idx_html = idx_html.replace('{{PORTAL_DATA_JSON}}', json.dumps(data, ensure_ascii=False))
     idx_html = idx_html.replace('{{POST_URL_MAP_JSON}}', json.dumps(post_url_map, ensure_ascii=False))
+    idx_html = idx_html.replace('{{UPDATED_LABEL}}', UPDATED_LABEL_IST)
     (ROOT / 'index.html').write_text(idx_html, encoding='utf-8')
 
     post_tpl_str = POST_TPL.read_text(encoding='utf-8')
@@ -192,6 +238,8 @@ def main():
             .replace('{{META_DESC}}', html_lib.escape((it.get('shortInfo') or it['title'])[:155]))
             .replace('{{CATEGORY}}', html_lib.escape(cat_title))
             .replace('{{UPDATED_DATE}}', TODAY_STR)
+            .replace('{{POST_TIME_IST}}', format_post_time_ist(it))
+            .replace('{{DETAILED_ARTICLE_BLOCK}}', build_article_block(it, cat_title))
             .replace('{{SHORT_INFO}}', html_lib.escape(it.get('shortInfo') or it['title']))
             .replace('{{DATE_START}}', html_lib.escape(dates.get('start', 'Check Portal')))
             .replace('{{DATE_LAST}}', html_lib.escape(dates.get('lastDate', 'Check Portal')))
@@ -229,3 +277,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
