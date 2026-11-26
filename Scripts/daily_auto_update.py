@@ -18,12 +18,34 @@ MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 
 
 OFFICIAL_DOMAINS = ('.gov.in', '.nic.in', '.ac.in', 'ibps.in', 'rrbapply.gov.in', 'cdn.digialm.com', 'iocl.com', 'sbi.co.in')
 
+SKIP_KEYWORDS = (
+    'previous year question', 'repeated question', 'most important question',
+    'mock test', 'practice set', 'model paper', 'preparation tips', 'study plan',
+    'salary structure', 'cut off expected', 'book list'
+)
+
+def clean_title(t):
+    t = re.sub(r'^(sarkari\s*jobs?|latest\s*news|breaking)\s*[:\-–]\s*', '', t, flags=re.IGNORECASE).strip()
+    return t
+
+def is_valid_portal_item(title):
+    t = title.lower()
+    if not title or any(bad in t for bad in SKIP_KEYWORDS):
+        return False
+    valid_signals = (
+        'recruitment', 'vacancy', 'vacancies', 'online form', 'apply', 'notification',
+        'admit card', 'hall ticket', 'city slip', 'exam city', 'exam date', 'schedule',
+        'result', 'score card', 'merit list', 'answer key', 'objection', 'syllabus',
+        'correction', 'edit window', 'extended', 'last date', 'apprentice', 'scholarship',
+        'admission', 'counselling', 'interview', 'call letter'
+    )
+    return any(sig in t for sig in valid_signals)
+
 def is_official_url(u):
     u_low = (u or '').lower()
     return u_low.startswith('https://') and any(d in u_low for d in OFFICIAL_DOMAINS)
 
 def discover_official_links(title):
-    """Find real official .gov.in / .nic.in / .pdf URLs for a specific exam title."""
     found = []
     try:
         q = f"{title} official site:gov.in OR site:nic.in OR filetype:pdf"
@@ -48,7 +70,7 @@ def classify_target(title):
         return 'correction', 'EDIT'
     if 'extended' in t or 'last date' in t or 'closing' in t:
         return 'lastDate', 'EXTENDED' if 'extended' in t else 'LAST DATE'
-    if 'admit card' in t or 'hall ticket' in t or 'city slip' in t:
+    if 'admit card' in t or 'hall ticket' in t or 'city slip' in t or 'call letter' in t:
         return 'admit', 'ADMIT CARD'
     if 'answer key' in t or 'objection' in t:
         return 'answer', 'KEY OUT'
@@ -76,10 +98,10 @@ def gather_raw_signals():
         with urllib.request.urlopen(req, timeout=20) as resp:
             xml_data = resp.read()
         root = ET.fromstring(xml_data)
-        for item in root.findall('./channel/item')[:5]:
-            t = (item.findtext('title') or '').split(' - ')[0].strip()
+        for item in root.findall('./channel/item')[:6]:
+            t = clean_title((item.findtext('title') or '').split(' - ')[0])
             d = (item.findtext('pubDate') or 'Today')[:16]
-            if t:
+            if is_valid_portal_item(t):
                 links = discover_official_links(t)
                 raw_list.append((t, d, links))
     return raw_list
@@ -94,13 +116,15 @@ def create_posts_with_gemini(api_key, raw_list):
 
     prompt = (
         f"Today is {today}. Here are recent Indian exam headlines with discovered official URLs:\n{signals_txt}\n\n"
-        "Select up to 5 genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
-        "Last Date / Extended Notices, Syllabus, or Form Correction Windows. Write 100% original, plagiarism-free content.\n"
-        "CRITICAL LINK RULE: For each item, pick the exact deep URL from 'Official URLs found' (e.g. exact Apply/Admit/Result/Login URL for primaryUrl, exact .pdf notice URL for secondaryUrl if available, and main portal domain for officialUrl). NEVER use a third-party news/blog URL and NEVER invent a URL.\n"
-        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array of objects, each having:\n'
+        "Select ONLY genuine Indian Government Job notifications, Admit Cards, Results, Answer Keys, "
+        "Last Date / Extended Notices, Syllabus, or Form Correction Windows. "
+        "STRICTLY EXCLUDE previous year question papers, repeated questions, mock tests, preparation tips, or any 'SARKARI JOBS:' prefix. "
+        "Write 100% original, plagiarism-free content.\n"
+        "CRITICAL LINK RULE: Pick the exact deep URL from 'Official URLs found' (exact Apply/Admit/Result/Login URL for primaryUrl, exact .pdf notice URL for secondaryUrl if available, and main portal domain for officialUrl). NEVER use a third-party news/blog URL and NEVER invent a URL.\n"
+        'Return ONLY a valid JSON object (no markdown fences) with key "updates" as an array (max 5 items), each having:\n'
         '- "target": one of ["lastDate", "correction", "result", "admit", "jobs", "answer", "syllabus", "admission", "verification", "diploma", "outsourcing"]\n'
         '- "isMajor": boolean\n'
-        '- "title": clean concise exam/post title\n'
+        '- "title": clean concise exam/post title (NO "SARKARI JOBS:" prefix)\n'
         '- "badge": short pill (e.g. "NEW", "OUT", "EXTENDED", "LAST DATE", "KEY OUT")\n'
         '- "shortInfo": 2 original sentences summarizing the update\n'
         '- "startDate": string\n'
@@ -109,7 +133,7 @@ def create_posts_with_gemini(api_key, raw_list):
         '- "fee": string\n'
         '- "age": string\n'
         '- "vacancies": string\n'
-        '- "primaryUrl": exact deep action URL (Apply / Admit Card / Result / Answer Key)\n'
+        '- "primaryUrl": exact deep action URL\n'
         '- "secondaryUrl": exact official Notification PDF or notice URL\n'
         '- "officialUrl": main official website homepage\n'
         '- "detailedArticle": A detailed, 100% original 800-word article in plain HTML (<p>, <h3>, <ul>, <li>) covering Overview, Eligibility, Selection Process, Step-by-Step Guide, Tips, and 4 FAQs.'
@@ -134,7 +158,7 @@ def create_posts_with_gemini(api_key, raw_list):
 
 def build_original_fallback(raw_list):
     updates = []
-    for t, d, links in raw_list[:6]:
+    for t, d, links in raw_list[:5]:
         target, badge = classify_target(t)
         pdf_link = next((l for l in links if '.pdf' in l.lower()), '')
         deep_link = next((l for l in links if '.pdf' not in l.lower()), '') or pdf_link or 'https://www.india.gov.in/'
@@ -181,8 +205,8 @@ def main():
 
     added = 0
     for idx, u in enumerate(updates):
-        title = (u.get('title') or '').strip()
-        if not title or title.lower() in existing_titles:
+        title = clean_title(u.get('title') or '')
+        if not is_valid_portal_item(title) or title.lower() in existing_titles:
             continue
         existing_titles.add(title.lower())
         target = u.get('target', 'jobs')
@@ -237,7 +261,7 @@ def main():
 
     if added:
         DATA_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
-    print(f'Added {added} new updates with deep official links.')
+    print(f'Added {added} new clean updates with deep official links.')
 
 if __name__ == '__main__':
     main()
