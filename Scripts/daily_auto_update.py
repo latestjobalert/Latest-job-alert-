@@ -103,7 +103,7 @@ def create_posts_with_gemini(api_key, raw_signals):
             text = res['candidates'][0]['content']['parts'][0]['text']
             m = re.search(r'\{[\s\S]*\}', text)
             return json.loads(m.group(0)).get('updates', []) if m else []
-        except urllib.error.HTTPError as e:
+        timeout=60
             print(f'{model} HTTP {e.code}')
             if e.code in (404, 429, 503):
                 continue
